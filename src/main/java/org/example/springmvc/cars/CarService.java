@@ -22,7 +22,14 @@ public class CarService {
                 .toList();
     }
 
-    public void createCar(CreateCarDTO dto) {
+    public List<CarDTO> getByMake(String make) {
+        return repository.findByMakeIgnoreCase(make)
+                .stream()
+                .map(CarMapper::toDto)
+                .toList();
+    }
+
+    public void create(CreateCarDTO dto) {
         Car car = CarMapper.fromDto(dto);
         repository.save(car);
     }
