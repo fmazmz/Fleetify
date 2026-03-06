@@ -1,15 +1,20 @@
 package org.example.springmvc.cars.mappers;
 
-import org.example.springmvc.cars.Car;
-import org.example.springmvc.cars.dto.CarDTO;
-import org.example.springmvc.cars.dto.CreateCarDTO;
+import org.example.springmvc.cars.model.Car;
+import org.example.springmvc.cars.model.dto.CarDTO;
+import org.example.springmvc.cars.model.dto.CreateCarDTO;
 
 public class CarMapper {
 
     public static CarDTO toDto(Car car) {
         return new CarDTO(
+                car.getId(),
                 car.getMake(),
                 car.getModel(),
+                car.getMileage(),
+                car.getHourlyPrice(),
+                car.getLicencePlate(),
+                car.getVin(),
                 car.getYear()
         );
     }
@@ -18,6 +23,10 @@ public class CarMapper {
         return new Car(
                 dto.make(),
                 dto.model(),
+                dto.mileage(),
+                dto.hourlyPrice(),
+                dto.licencePlate(),
+                dto.vin(),
                 dto.year()
         );
     }

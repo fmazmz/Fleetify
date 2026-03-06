@@ -1,13 +1,12 @@
 package org.example.springmvc.cars;
 
-import org.example.springmvc.cars.dto.CarDTO;
-import org.example.springmvc.cars.dto.CreateCarDTO;
+import org.example.springmvc.cars.model.dto.CarDTO;
+import org.example.springmvc.cars.model.dto.CreateCarDTO;
 import org.example.springmvc.cars.mappers.CarMapper;
+import org.example.springmvc.cars.model.Car;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class CarService {

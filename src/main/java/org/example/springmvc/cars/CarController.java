@@ -1,12 +1,11 @@
 package org.example.springmvc.cars;
 
 import jakarta.validation.Valid;
-import org.example.springmvc.cars.dto.CarDTO;
-import org.example.springmvc.cars.dto.CreateCarDTO;
+import org.example.springmvc.cars.model.dto.CarDTO;
+import org.example.springmvc.cars.model.dto.CreateCarDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,7 +39,7 @@ public class CarController {
 
     @GetMapping("new")
     public String getCreationForm(Model model) {
-        model.addAttribute("car", new CreateCarDTO(null, null, null));
+        model.addAttribute("car", new CreateCarDTO(null, null, 0, null, null, null, null));
         return "cars/create-car";
     }
 
