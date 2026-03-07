@@ -1,8 +1,8 @@
-package org.example.springmvc.cars;
+package org.example.springmvc.domain.cars;
 
 import jakarta.validation.Valid;
-import org.example.springmvc.cars.model.dto.CarDTO;
-import org.example.springmvc.cars.model.dto.CreateCarDTO;
+import org.example.springmvc.domain.cars.model.dto.CarDTO;
+import org.example.springmvc.domain.cars.model.dto.CreateCarDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;

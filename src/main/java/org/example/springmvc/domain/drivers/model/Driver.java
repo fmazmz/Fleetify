@@ -1,11 +1,11 @@
-package org.example.springmvc.drivers;
+package org.example.springmvc.domain.drivers.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.springmvc.cars.model.Car;
+import org.example.springmvc.domain.cars.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,7 @@
-package org.example.springmvc.drivers;
+package org.example.springmvc.domain.drivers;
 
+import org.example.springmvc.domain.drivers.model.dto.CreateDriverDTO;
+import org.example.springmvc.domain.drivers.model.Driver;
 import org.springframework.stereotype.Service;
 
 @Service

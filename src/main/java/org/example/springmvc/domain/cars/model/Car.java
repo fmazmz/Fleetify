@@ -1,11 +1,11 @@
-package org.example.springmvc.cars.model;
+package org.example.springmvc.domain.cars.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.example.springmvc.drivers.Driver;
+import org.example.springmvc.domain.drivers.model.Driver;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 

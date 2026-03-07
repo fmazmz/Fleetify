@@ -1,8 +1,8 @@
-package org.example.springmvc.cars.mappers;
+package org.example.springmvc.domain.cars;
 
-import org.example.springmvc.cars.model.Car;
-import org.example.springmvc.cars.model.dto.CarDTO;
-import org.example.springmvc.cars.model.dto.CreateCarDTO;
+import org.example.springmvc.domain.cars.model.Car;
+import org.example.springmvc.domain.cars.model.dto.CarDTO;
+import org.example.springmvc.domain.cars.model.dto.CreateCarDTO;
 
 public class CarMapper {
 

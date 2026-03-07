@@ -1,12 +1,13 @@
-package org.example.springmvc.cars.model.dto;
+package org.example.springmvc.domain.cars.model.dto;
 
 import java.math.BigDecimal;
 import java.time.Year;
+import java.util.UUID;
 
-public record CreateCarDTO(
+public record CarDTO(
+        UUID id,
         String make,
         String model,
-        int mileage,
         BigDecimal hourlyPrice,
         String licencePlate,
         String vin,

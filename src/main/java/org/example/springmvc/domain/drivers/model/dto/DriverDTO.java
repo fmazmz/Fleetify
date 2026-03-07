@@ -1,6 +1,6 @@
-package org.example.springmvc.drivers;
+package org.example.springmvc.domain.drivers.model.dto;
 
-import org.example.springmvc.cars.model.dto.CarDTO;
+import org.example.springmvc.domain.cars.model.dto.CarDTO;
 
 import java.util.List;
 import java.util.UUID;

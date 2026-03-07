@@ -1,4 +1,4 @@
-package org.example.springmvc.drivers;
+package org.example.springmvc.domain.drivers.model.dto;
 
 public record CreateDriverDTO(
         String email,

@@ -1,6 +1,6 @@
-package org.example.springmvc.cars;
+package org.example.springmvc.domain.cars;
 
-import org.example.springmvc.cars.model.Car;
+import org.example.springmvc.domain.cars.model.Car;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.ListCrudRepository;
