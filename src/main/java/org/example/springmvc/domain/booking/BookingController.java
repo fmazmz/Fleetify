@@ -4,6 +4,7 @@ import org.example.springmvc.domain.booking.dto.CreateBookingDTO;
 import org.example.springmvc.domain.cars.CarService;
 import org.example.springmvc.domain.drivers.DriverService;
 import org.example.springmvc.domain.drivers.model.Driver;
+import org.example.springmvc.domain.insurances.InsuranceType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/bookings")
@@ -44,9 +48,14 @@ public class BookingController {
                 null
         );
 
+        Map<InsuranceType, String> insuranceDisplayNames = new LinkedHashMap<>();
+        insuranceDisplayNames.put(InsuranceType.BASIC, "Basic");
+        insuranceDisplayNames.put(InsuranceType.PREMIUM, "Premium");
+        insuranceDisplayNames.put(InsuranceType.FULL_COVERAGE, "Full Coverage");
+
         model.addAttribute("booking", bookingDTO);
         model.addAttribute("cars", carService.getAll(Pageable.unpaged()).getContent());
-        model.addAttribute("insuranceTypes", new String[]{"BASIC", "PREMIUM", "FULL_COVERAGE"});
+        model.addAttribute("insuranceTypes", InsuranceType.values());
 
         return "bookings/create-booking";
     }

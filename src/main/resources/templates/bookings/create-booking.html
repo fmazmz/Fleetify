@@ -65,7 +65,10 @@
 
         <label for="insurance">Insurance:</label>
         <select id="insurance" th:field="*{insuranceType}">
-            <option th:each="type : ${insuranceTypes}" th:value="${type}" th:text="${type}"></option>
+            <option th:each="type : ${insuranceTypes}"
+                    th:value="${type}"
+                    th:text="${type}">
+            </option>
         </select>
 
         <button type="submit">Book</button>
