@@ -56,13 +56,7 @@ public class BookingService {
         BigDecimal insuranceCost = insurance.getPrice(dto.insuranceType());
         BigDecimal total = carCost.add(insuranceCost);
 
-        Booking booking = new Booking();
-        booking.setCar(car);
-        booking.setDriver(driver);
-        booking.setStartTime(dto.startTime());
-        booking.setEndTime(dto.endTime());
-        booking.setInsuranceType(dto.insuranceType());
-        booking.setTotalPrice(total);
+        Booking booking = BookingMapper.fromDto(dto, car, driver, total);
 
         repository.save(booking);
     }

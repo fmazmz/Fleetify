@@ -1,6 +1,7 @@
 package org.example.springmvc.bookings.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,4 +35,13 @@ public class Booking {
     private InsuranceType insuranceType;
 
     private BigDecimal totalPrice;
+
+    public Booking(Car car, Driver driver, Instant startTime, Instant endTime, InsuranceType insuranceType, BigDecimal totalPrice) {
+        this.car = car;
+        this.driver = driver;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.insuranceType = insuranceType;
+        this.totalPrice = totalPrice;
+    }
 }
