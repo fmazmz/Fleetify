@@ -6,9 +6,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface DriverRepository extends ListCrudRepository<Driver, UUID> {
     Page<Driver> findAll(Pageable pageable);
+
+    Optional<Driver> findByEmail(String email);
+    Optional<Driver> findBySsn(String ssn);
 }
