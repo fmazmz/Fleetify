@@ -66,9 +66,23 @@ public class BookingController {
     @PostMapping
     public String create(@Valid @ModelAttribute("booking") CreateBookingDTO booking,
                          BindingResult bindingResult,
-                         RedirectAttributes redirectAttributes) {
+                         RedirectAttributes redirectAttributes,
+                         Model model) {
 
         if (bindingResult.hasErrors()) {
+
+            model.addAttribute("drivers",
+                    driverService.getAllPageable(Pageable.unpaged()).getContent());
+
+            model.addAttribute("cars",
+                    carService.getAll(Pageable.unpaged()).getContent());
+
+            model.addAttribute("insuranceTypes", Map.of(
+                    InsuranceType.BASIC, "Basic",
+                    InsuranceType.PREMIUM, "Premium",
+                    InsuranceType.FULL_COVERAGE, "Full Coverage"
+            ));
+
             return "bookings/create";
         }
 
