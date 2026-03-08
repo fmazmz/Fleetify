@@ -1,5 +1,6 @@
 package org.example.springmvc.bookings.service;
 
+import org.example.springmvc.bookings.BookingFilter;
 import org.example.springmvc.bookings.dto.BookingDTO;
 import org.example.springmvc.bookings.mapper.BookingMapper;
 import org.example.springmvc.bookings.repository.BookingRepository;
@@ -37,6 +38,28 @@ public class BookingService {
         this.driverRepository = driverRepository;
         this.insurance = insurance;
     }
+
+    public Page<BookingDTO> search(Pageable pageable, BookingFilter filter) {
+
+        if (filter.getCarId() != null) {
+            return repository.findByCarId(pageable, filter.getCarId())
+                    .map(BookingMapper::toDto);
+        }
+
+        if (filter.getDriverId() != null) {
+            return repository.findByDriverId(pageable, filter.getDriverId())
+                    .map(BookingMapper::toDto);
+        }
+
+        if (filter.getInsuranceType() != null) {
+            return repository.findByInsuranceType(pageable, filter.getInsuranceType())
+                    .map(BookingMapper::toDto);
+        }
+
+        return repository.findAll(pageable)
+                .map(BookingMapper::toDto);
+    }
+
 
     public void create(CreateBookingDTO dto) {
         Car car = carRepository.findById(dto.carId())

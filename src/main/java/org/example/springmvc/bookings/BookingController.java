@@ -35,15 +35,10 @@ public class BookingController {
     }
 
     @GetMapping
-    public String listBookings(
-            @PageableDefault(value = 5) Pageable pageable,
-            @RequestParam(required = false) UUID carId,
-            Model model) {
-        Page<BookingDTO> bookings = carId == null ?
-                bookingService.getAll(pageable) :
-                bookingService.getByCarId(pageable, carId);
-
+    public String listBookings(@PageableDefault(value = 5) Pageable pageable, @ModelAttribute BookingFilter filter, Model model) {
+        Page<BookingDTO> bookings = bookingService.search(pageable, filter);
         model.addAttribute("bookings", bookings);
+        model.addAttribute("filter", filter);
         return "bookings/list";
     }
 
