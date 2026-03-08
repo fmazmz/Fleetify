@@ -20,6 +20,11 @@ public class DriverService {
     }
 
     public void create(CreateDriverDTO dto) {
+        // Compressing message to prevent user enumeration
+        if (repository.findByEmail(dto.email()).isPresent() || repository.findBySsn(dto.ssn()).isPresent()) {
+            throw new IllegalArgumentException("Unable to create driver. Please check your information and try again.");
+        }
+
         Driver driver = DriverMapper.fromDto(dto);
         repository.save(driver);
     }
