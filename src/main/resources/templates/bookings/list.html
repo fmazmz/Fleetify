@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bookings</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/global.css}"/>
+</head>
+<body>
+
+<div style="display: flex; text-align: center; align-items: center; flex-direction: column; margin-top: 0px">
+    <h2>Bookings</h2>
+</div>
+
+<div style="display: flex; text-align: center; align-items: center; flex-direction: column; margin-top: 0px">
+
+    <table style="border-collapse: collapse; border: 1px solid black; margin: 0 auto;">
+        <thead>
+        <tr>
+            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
+                Driver
+            </th>
+            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
+                Car
+            </th>
+            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
+                Start Time
+            </th>
+            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
+                End Time
+            </th>
+            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
+                Insurance
+            </th>
+            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
+                Total Price
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="b : ${bookings.content}">
+            <td th:text="${b.driverId}">Driver</td>
+            <td th:text="${b.carId}">Car</td>
+            <td th:text="${b.startTime}">Start Time</td>
+            <td th:text="${b.endTime}">End Time</td>
+            <td th:text="${b.insuranceType}">Insurance Type</td>
+            <td th:text="${b.totalPrice}">Total Price</td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<div style="margin-top:20px; text-align:center;">
+
+    <a th:if="${bookings.hasPrevious()}"
+       th:href="@{/bookings(page=${bookings.number-1})}">
+        Previous
+    </a>
+
+    <span>
+        Page <span th:text="${bookings.number + 1}"></span>
+        of <span th:text="${bookings.totalPages}"></span>
+    </span>
+
+    <a th:if="${bookings.hasNext()}"
+       th:href="@{/bookings(page=${bookings.number+1})}">
+        Next
+    </a>
+
+</div>
+
+<div th:if="${success}"
+     style="margin-top: 20px; text-align: center; color: green; font-weight: bold;">
+    <span th:text="${success}"></span>
+</div>
+
+</body>
+</html>

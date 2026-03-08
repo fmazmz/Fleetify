@@ -1,19 +1,19 @@
 package org.example.springmvc.bookings;
 
 import jakarta.validation.Valid;
+import org.example.springmvc.bookings.dto.BookingDTO;
 import org.example.springmvc.bookings.dto.CreateBookingDTO;
 import org.example.springmvc.bookings.service.BookingService;
 import org.example.springmvc.cars.service.CarService;
 import org.example.springmvc.drivers.service.DriverService;
 import org.example.springmvc.insurances.InsuranceType;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.LinkedHashMap;
@@ -31,6 +31,14 @@ public class BookingController {
         this.bookingService = bookingService;
         this.carService = carService;
         this.driverService = driverService;
+    }
+
+    @GetMapping
+    public String listBookings(
+            @PageableDefault(value = 5) Pageable pageable, Model model) {
+        Page<BookingDTO> bookings = bookingService.getAll(pageable);
+        model.addAttribute("bookings", bookings);
+        return "bookings/list";
     }
 
     @GetMapping("/new")
@@ -88,6 +96,6 @@ public class BookingController {
 
         bookingService.create(booking);
         redirectAttributes.addFlashAttribute("success", "Booking created successfully!");
-        return "redirect:/cars";
+        return "redirect:/bookings";
     }
 }
