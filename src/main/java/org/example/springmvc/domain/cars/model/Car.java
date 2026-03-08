@@ -33,11 +33,12 @@ public class Car {
     private BigDecimal hourlyPrice;
 
     @NotBlank
+    @Column(unique = true)
     private String licencePlate;
     @NotBlank
+    @Column(unique = true)
     private String vin;
 
-    @Min(value = 1800)
     @PastOrPresent
     private Year year;
 
