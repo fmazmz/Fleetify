@@ -12,17 +12,42 @@
 
 <div style="display: flex; text-align: center; align-items: center; flex-direction: column; margin-top: 0px">
 
-    <form th:action="@{/cars}" th:object="${car}" method="post">
-        <label for="make">Make</label>
-        <input type="text" id="make" th:field="*{make}">
+    <form style="display:flex; flex-direction:column; gap:10px;" th:action="@{/cars}" th:object="${car}" method="post">
 
-        <label for="model">Model</label>
-        <input type="text" id="model" th:field="*{model}">
+        <div style="display:flex; gap:10px; align-items:center;">
+            <label for="make" style="width:120px;">Make</label>
+            <input type="text" id="make" th:field="*{make}">
+        </div>
 
-        <label for="year">Year</label>
-        <input type="text" id="year" th:field="*{year}">
+        <div style="display:flex; gap:10px; align-items:center;">
+            <label for="model" style="width:120px;">Model</label>
+            <input type="text" id="model" th:field="*{model}">
+        </div>
 
-        <button type="submit">Create Car</button>
+
+        <div style="display:flex; gap:10px; align-items:center;">
+            <label for="hourlyPrice" style="width:120px;">Hourly Price</label>
+            <input type="number" id="hourlyPrice" th:field="*{hourlyPrice}">
+        </div>
+
+        <div style="display:flex; gap:10px; align-items:center;">
+            <label for="licencePlate" style="width:120px;">License Plate</label>
+            <input type="text" id="licencePlate" th:field="*{licencePlate}">
+        </div>
+
+        <div style="display:flex; gap:10px; align-items:center;">
+            <label for="vin" style="width:120px;">VIN</label>
+            <input type="text" id="vin" th:field="*{vin}">
+        </div>
+
+        <div style="display:flex; gap:10px; align-items:center;">
+            <label for="year" style="width:120px;">Year</label>
+            <input type="text" id="year" th:field="*{year}">
+        </div>
+
+        <div style ="display: flex; align-items: center; flex-direction: column; margin-top:10px; width:100%;">
+            <button type="submit">Create Car</button>
+        </div>
     </form>
 </div>
 </body>

@@ -6,7 +6,6 @@ import java.time.Year;
 public record CreateCarDTO(
         String make,
         String model,
-        int mileage,
         BigDecimal hourlyPrice,
         String licencePlate,
         String vin,

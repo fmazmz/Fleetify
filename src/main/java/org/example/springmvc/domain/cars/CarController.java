@@ -39,7 +39,7 @@ public class CarController {
 
     @GetMapping("new")
     public String getCreationForm(Model model) {
-        model.addAttribute("car", new CreateCarDTO(null, null, 0, null, null, null, null));
+        model.addAttribute("car", new CreateCarDTO(null, null, null, null, null, null));
         return "cars/create-car";
     }
 
