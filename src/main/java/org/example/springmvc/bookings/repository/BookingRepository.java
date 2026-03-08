@@ -1,6 +1,7 @@
 package org.example.springmvc.bookings.repository;
 
 import org.example.springmvc.bookings.model.Booking;
+import org.example.springmvc.insurances.InsuranceType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +16,9 @@ import java.util.UUID;
 public interface BookingRepository extends ListCrudRepository<Booking, UUID> {
     Page<Booking> findAll(Pageable pageable);
     Page<Booking> findByCarId(Pageable pageable, UUID carId);
-    Optional<Booking> findCarById(UUID carId);
+    Page<Booking> findByDriverId(Pageable pageable, UUID driverId);
+    Page<Booking> findByInsuranceType(Pageable pageable, InsuranceType insuranceType);
+
 
     @Query("""
 SELECT COUNT(b) > 0
