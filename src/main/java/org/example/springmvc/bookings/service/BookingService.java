@@ -1,5 +1,7 @@
 package org.example.springmvc.bookings.service;
 
+import org.example.springmvc.bookings.dto.BookingDTO;
+import org.example.springmvc.bookings.mapper.BookingMapper;
 import org.example.springmvc.bookings.repository.BookingRepository;
 import org.example.springmvc.bookings.dto.CreateBookingDTO;
 import org.example.springmvc.bookings.model.Booking;
@@ -8,6 +10,8 @@ import org.example.springmvc.cars.model.Car;
 import org.example.springmvc.drivers.repository.DriverRepository;
 import org.example.springmvc.drivers.model.Driver;
 import org.example.springmvc.insurances.CarInsurance;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -60,5 +64,9 @@ public class BookingService {
         booking.setTotalPrice(total);
 
         repository.save(booking);
+    }
+
+    public Page<BookingDTO> getAll(Pageable pageable) {
+        return repository.findAll(pageable).map(BookingMapper::toDto);
     }
 }
