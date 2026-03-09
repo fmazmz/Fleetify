@@ -6,7 +6,10 @@ import org.example.springmvc.bookings.dto.CreateBookingDTO;
 import org.example.springmvc.bookings.model.BookingFilter;
 import org.example.springmvc.cars.CarService;
 import org.example.springmvc.drivers.DriverService;
+import org.example.springmvc.drivers.model.Driver;
 import org.example.springmvc.insurances.InsuranceType;
+import org.example.springmvc.users.UserService;
+import org.example.springmvc.users.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -25,11 +28,13 @@ public class BookingController {
     private final BookingService bookingService;
     private final CarService carService;
     private final DriverService driverService;
+    private final UserService userService;
 
-    public BookingController(BookingService bookingService, CarService carService, DriverService driverService) {
+    public BookingController(BookingService bookingService, CarService carService, DriverService driverService, UserService userService) {
         this.bookingService = bookingService;
         this.carService = carService;
         this.driverService = driverService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -42,30 +47,30 @@ public class BookingController {
 
     @GetMapping("/new")
     public String createForm(Model model) {
-        var drivers = driverService.getAllPageable(Pageable.unpaged()).getContent();
-
-        if (drivers.isEmpty()) {
-            model.addAttribute("error", "No drivers found. Please add a driver first.");
-        }
+        User user = userService.getCurrentUser();
+        Driver driver = user.getDriver();
 
         CreateBookingDTO bookingDTO = new CreateBookingDTO(
                 null,
-                null,
+                driver != null ? driver.getId() : null,
                 null,
                 null,
                 null
         );
+
+        model.addAttribute("booking", bookingDTO);
+        model.addAttribute("cars", carService.getAll(Pageable.unpaged()).getContent());
 
         Map<InsuranceType, String> insuranceDisplayNames = Map.of(
                 InsuranceType.BASIC, "Basic",
                 InsuranceType.PREMIUM, "Premium",
                 InsuranceType.FULL_COVERAGE, "Full Coverage"
         );
-
-        model.addAttribute("booking", bookingDTO);
-        model.addAttribute("drivers", drivers);
-        model.addAttribute("cars", carService.getAll(Pageable.unpaged()).getContent());
         model.addAttribute("insuranceTypes", insuranceDisplayNames);
+
+        if (driver == null) {
+            model.addAttribute("error", "You must become a driver first.");
+        }
 
         return "bookings/create";
     }
@@ -77,10 +82,6 @@ public class BookingController {
                          Model model) {
 
         if (bindingResult.hasErrors()) {
-
-            model.addAttribute("drivers",
-                    driverService.getAllPageable(Pageable.unpaged()).getContent());
-
             model.addAttribute("cars",
                     carService.getAll(Pageable.unpaged()).getContent());
 
@@ -95,6 +96,6 @@ public class BookingController {
 
         bookingService.create(booking);
         redirectAttributes.addFlashAttribute("success", "Booking created successfully!");
-        return "redirect:/bookings";
+        return "redirect:/";
     }
 }
