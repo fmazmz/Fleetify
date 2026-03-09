@@ -66,7 +66,6 @@ public class BookingController {
 
         model.addAttribute("booking", bookingDTO);
         model.addAttribute("drivers", drivers);
-        model.addAttribute("cars", carService.getAll(Pageable.unpaged()).getContent());
         model.addAttribute("insuranceTypes", insuranceDisplayNames);
 
         return "bookings/create";
@@ -82,9 +81,6 @@ public class BookingController {
 
             model.addAttribute("drivers",
                     driverService.getAllPageable(Pageable.unpaged()).getContent());
-
-            model.addAttribute("cars",
-                    carService.getAll(Pageable.unpaged()).getContent());
 
             model.addAttribute("insuranceTypes", Map.of(
                     InsuranceType.BASIC, "Basic",
