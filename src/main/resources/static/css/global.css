@@ -5,6 +5,7 @@ html {
     font-family: 'IBM Plex Mono', monospace;
 }
 
+/* Error Messages */
 .error-message {
     background-color: #fee;
     border: 1px solid #fcc;
@@ -19,4 +20,95 @@ html {
     color: #c33;
     font-size: 0.9em;
     margin-left: 10px;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: cornflowerblue;
+    gap: 10px;
+}
+
+/* Left: Fleetify logo */
+.navbar-left h1 {
+    margin: 0;
+    color: black;
+}
+
+/* Right: buttons and dropdowns */
+.navbar-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Links and buttons */
+.navbar-right a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.navbar-right button {
+    padding: 6px 12px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.navbar form, .navbar a {
+    margin: 0;
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown button */
+.dropbtn {
+    background-color: cornflowerblue;
+    color: white;
+    padding: 6px 12px;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1;
+    flex-direction: column;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: cornflowerblue;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+    color: darkblue;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: flex;
+}
+
+/* Change button color on hover */
+.dropdown:hover .dropbtn {
+    background-color: darkblue;
 }

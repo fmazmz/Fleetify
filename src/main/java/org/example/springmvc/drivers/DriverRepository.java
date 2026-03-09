@@ -1,4 +1,4 @@
-package org.example.springmvc.drivers.repository;
+package org.example.springmvc.drivers;
 
 import org.example.springmvc.drivers.model.Driver;
 import org.springframework.data.domain.Page;
@@ -12,7 +12,5 @@ import java.util.UUID;
 @Repository
 public interface DriverRepository extends ListCrudRepository<Driver, UUID> {
     Page<Driver> findAll(Pageable pageable);
-
-    Optional<Driver> findByEmail(String email);
     Optional<Driver> findBySsn(String ssn);
 }

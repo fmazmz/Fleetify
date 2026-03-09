@@ -78,21 +78,6 @@
     <h2>Book a Car</h2>
 
     <form th:action="@{/bookings}" th:object="${booking}" method="post">
-
-        <div class="form-field">
-            <label for="driver">Driver</label>
-            <div class="form-field-input">
-                <select id="driver" th:field="*{driverId}">
-                    <option value="">Select driver</option>
-                    <option th:each="driver : ${drivers}"
-                            th:value="${driver.id}"
-                            th:text="${driver.fname + ' ' + driver.lname + ' - ' + driver.email}">
-                    </option>
-                </select>
-                <span class="field-error" th:errors="*{driverId}"></span>
-            </div>
-        </div>
-
         <div class="form-field">
             <label for="car">Car</label>
             <div class="form-field-input">
@@ -100,7 +85,7 @@
                     <option value="">Select car</option>
                     <option th:each="car : ${cars}"
                             th:value="${car.id}"
-                            th:text="${car.make + ' ' + car.model + ' ' + car.id}">
+                            th:text="${car.make + ' - ' + car.model}">
                     </option>
                 </select>
                 <span class="field-error" th:errors="*{carId}"></span>

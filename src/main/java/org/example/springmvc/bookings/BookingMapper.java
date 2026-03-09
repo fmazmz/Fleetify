@@ -1,4 +1,4 @@
-package org.example.springmvc.bookings.mapper;
+package org.example.springmvc.bookings;
 
 import org.example.springmvc.bookings.dto.BookingDTO;
 import org.example.springmvc.bookings.dto.CreateBookingDTO;
@@ -7,7 +7,6 @@ import org.example.springmvc.cars.model.Car;
 import org.example.springmvc.drivers.model.Driver;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 
 public class BookingMapper {
