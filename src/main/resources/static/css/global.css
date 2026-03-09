@@ -5,6 +5,7 @@ html {
     font-family: 'IBM Plex Mono', monospace;
 }
 
+/* Error Messages */
 .error-message {
     background-color: #fee;
     border: 1px solid #fcc;
@@ -21,6 +22,7 @@ html {
     margin-left: 10px;
 }
 
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -30,17 +32,20 @@ html {
     gap: 10px;
 }
 
+/* Left: Fleetify logo */
 .navbar-left h1 {
     margin: 0;
     color: black;
 }
 
+/* Right: buttons and dropdowns */
 .navbar-right {
     display: flex;
     gap: 10px;
     align-items: center;
 }
 
+/* Links and buttons */
 .navbar-right a {
     color: white;
     text-decoration: none;
@@ -57,40 +62,53 @@ html {
     margin: 0;
 }
 
-.navbar button {
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown button */
+.dropbtn {
+    background-color: cornflowerblue;
+    color: white;
     padding: 6px 12px;
     font-size: 1em;
+    border: none;
     cursor: pointer;
-}
-
-.secondary-nav {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    margin-top: 20px;
-}
-
-.nav-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.nav-section p {
-    font-weight: bold;
-    margin-bottom: 8px;
-    font-size: 1.1em;
-}
-
-.nav-section a {
-    display: block;
-    margin: 4px 0;
-    text-decoration: none;
-    color: cornflowerblue;
     font-weight: 500;
-    transition: color 0.2s;
 }
 
-.nav-section a:hover {
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1;
+    flex-direction: column;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: cornflowerblue;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
     color: darkblue;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: flex;
+}
+
+/* Change button color on hover */
+.dropdown:hover .dropbtn {
+    background-color: darkblue;
 }
