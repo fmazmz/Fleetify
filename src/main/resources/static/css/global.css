@@ -20,3 +20,77 @@ html {
     font-size: 0.9em;
     margin-left: 10px;
 }
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: cornflowerblue;
+    gap: 10px;
+}
+
+.navbar-left h1 {
+    margin: 0;
+    color: black;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.navbar-right a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.navbar-right button {
+    padding: 6px 12px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.navbar form, .navbar a {
+    margin: 0;
+}
+
+.navbar button {
+    padding: 6px 12px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.secondary-nav {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 20px;
+}
+
+.nav-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-section p {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.nav-section a {
+    display: block;
+    margin: 4px 0;
+    text-decoration: none;
+    color: cornflowerblue;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-section a:hover {
+    color: darkblue;
+}
