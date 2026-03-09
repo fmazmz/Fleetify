@@ -9,10 +9,10 @@ public class UserMapper {
         );
     }
 
-    public static User fromDto(CreateUserDTO dto, UserRole role) {
+    public static User fromDto(CreateUserDTO dto, UserRole role, String encryptedPassword) {
         return new User(
                 dto.email(),
-                dto.password(),
+                encryptedPassword,
                 role
         );
     }
