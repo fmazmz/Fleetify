@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.springmvc.cars.model.Car;
+import org.example.springmvc.users.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +22,6 @@ public class Driver {
     private UUID id;
 
     @NotBlank
-    @Email
-    @Column(unique = true)
-    private String email;
-
-    @NotBlank
     private String fname;
 
     @NotBlank
@@ -39,8 +35,10 @@ public class Driver {
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
     private List<Car> cars = new ArrayList<>();
 
-    public Driver(String email, String fname, String lname, String ssn) {
-        this.email = email;
+    @OneToOne(mappedBy = "driver", fetch = FetchType.LAZY)
+    private User user;
+
+    public Driver(String fname, String lname, String ssn) {
         this.fname = fname;
         this.lname = lname;
         this.ssn = ssn;

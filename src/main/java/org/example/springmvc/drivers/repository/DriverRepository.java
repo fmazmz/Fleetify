@@ -12,7 +12,5 @@ import java.util.UUID;
 @Repository
 public interface DriverRepository extends ListCrudRepository<Driver, UUID> {
     Page<Driver> findAll(Pageable pageable);
-
-    Optional<Driver> findByEmail(String email);
     Optional<Driver> findBySsn(String ssn);
 }

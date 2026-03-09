@@ -1,5 +1,8 @@
 package org.example.springmvc.users;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +25,11 @@ public class UserService {
 
         User user = UserMapper.fromDto(dto, UserRole.APP_USER, encryptedPassword);
         repository.save(user);
+    }
+
+    public User getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return repository.findByEmail(auth.getName())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }

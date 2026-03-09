@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Become a Driver</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/global.css}"/>
+</head>
+<body>
+<div style="display: flex; text-align: center; align-items: center; flex-direction: column; margin-top: 0px">
+    <h2>Become a driver and get access to our car fleet</h2>
+</div>
+
+<div th:if="${error}" class="error-message" th:text="${error}">
+</div>
+
+<div style="display: flex; text-align: center; align-items: center; flex-direction: column; margin-top: 0px">
+
+    <form style="display:flex; flex-direction:column; gap:10px;" th:action="@{/drivers/new}" th:object="${driver}" method="post">
+
+        <div style="display:flex; gap:10px; align-items:center;">
+            <label for="fname" style="width:120px;">First Name</label>
+            <div style="display:flex; flex-direction:column;">
+                <input type="text" id="fname" th:field="*{fname}">
+                <span class="field-error" th:errors="*{fname}"></span>
+            </div>
+        </div>
+
+        <div style="display:flex; gap:10px; align-items:center;">
+            <label for="lname" style="width:120px;">Last Name</label>
+            <div style="display:flex; flex-direction:column;">
+                <input type="text" id="lname" th:field="*{lname}">
+                <span class="field-error" th:errors="*{lname}"></span>
+            </div>
+        </div>
+
+        <div style="display:flex; gap:10px; align-items:center;">
+            <label for="ssn" style="width:120px;">SSN</label>
+            <div style="display:flex; flex-direction:column;">
+                <input type="text" id="ssn" th:field="*{ssn}">
+                <span class="field-error" th:errors="*{ssn}"></span>
+            </div>
+        </div>
+
+        <div style="display: flex; align-items: center; flex-direction: column; margin-top:10px; width:100%;">
+            <button type="submit">Become a Driver</button>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>

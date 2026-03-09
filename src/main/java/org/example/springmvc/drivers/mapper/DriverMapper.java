@@ -9,7 +9,6 @@ public class DriverMapper {
 
     public static Driver fromDto(CreateDriverDTO dto) {
         return new Driver(
-                dto.email(),
                 dto.fname(),
                 dto.lname(),
                 dto.ssn()
@@ -19,7 +18,6 @@ public class DriverMapper {
     public static DriverDTO toDto(Driver driver) {
         return new DriverDTO(
                 driver.getId(),
-                driver.getEmail(),
                 driver.getFname(),
                 driver.getLname(),
                 driver.getSsn(),
