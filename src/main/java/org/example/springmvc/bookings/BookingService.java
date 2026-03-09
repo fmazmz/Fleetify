@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.time.Instant;
 
 @Service
 public class BookingService {
@@ -36,10 +37,13 @@ public class BookingService {
     }
 
     public Page<BookingDTO> search(Pageable pageable, BookingFilter filter) {
-        if (filter.carId() != null) {return repository.findByCarId(pageable, filter.carId()).map(BookingMapper::toDto);}
-        if (filter.driverId() != null) {return repository.findByDriverId(pageable, filter.driverId()).map(BookingMapper::toDto);}
-        if (filter.insuranceType() != null) {return repository.findByInsuranceType(pageable, filter.insuranceType()).map(BookingMapper::toDto);}
-        return repository.findAll(pageable).map(BookingMapper::toDto);}
+        return repository.searchBookings(
+                filter.carId(),
+                filter.driverId(),
+                filter.insuranceType(),
+                pageable
+        ).map(BookingMapper::toDto);
+    }
 
 
     public void create(CreateBookingDTO dto) {

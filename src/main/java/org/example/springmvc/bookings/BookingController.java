@@ -39,7 +39,9 @@ public class BookingController {
     }
 
     @GetMapping
-    public String listBookings(@PageableDefault(value = 5) Pageable pageable, @ModelAttribute BookingFilter filter, Model model) {
+    public String listBookings(@PageableDefault(value = 5) Pageable pageable,
+                               @ModelAttribute BookingFilter filter,
+                               Model model) {
         Page<BookingDTO> bookings = bookingService.search(pageable, filter);
         model.addAttribute("bookings", bookings);
         model.addAttribute("filter", filter);
