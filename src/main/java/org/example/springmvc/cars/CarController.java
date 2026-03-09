@@ -1,7 +1,6 @@
 package org.example.springmvc.cars;
 
 import org.example.springmvc.cars.dto.CreateCarDTO;
-import org.example.springmvc.cars.service.CarService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/cars")
+@RequestMapping("cars")
 public class CarController {
     private final CarService carService;
     public CarController(CarService carService) {this.carService = carService;}

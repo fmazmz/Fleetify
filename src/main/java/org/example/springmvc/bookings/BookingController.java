@@ -3,9 +3,9 @@ package org.example.springmvc.bookings;
 import jakarta.validation.Valid;
 import org.example.springmvc.bookings.dto.BookingDTO;
 import org.example.springmvc.bookings.dto.CreateBookingDTO;
-import org.example.springmvc.bookings.service.BookingService;
-import org.example.springmvc.cars.service.CarService;
-import org.example.springmvc.drivers.service.DriverService;
+import org.example.springmvc.bookings.model.BookingFilter;
+import org.example.springmvc.cars.CarService;
+import org.example.springmvc.drivers.DriverService;
 import org.example.springmvc.insurances.InsuranceType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,9 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/bookings")

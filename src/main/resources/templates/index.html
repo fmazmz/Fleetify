@@ -1,0 +1,56 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/global.css"/>
+    <title>Fleetify - Premium Car Rental Service</title>
+</head>
+
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-left">
+        <h1>Fleetify</h1>
+    </div>
+
+    <div class="navbar-right">
+        <div class="dropdown" sec:authorize="hasAnyRole('ADMIN','APP_USER','DRIVER')">
+            <button class="dropbtn">CARS ▼</button>
+            <div class="dropdown-content">
+                <a href="/cars">Browse Cars</a>
+                <a href="/cars/new" sec:authorize="hasRole('ADMIN')">Add New Car</a>
+            </div>
+        </div>
+
+        <div class="dropdown" sec:authorize="hasAnyRole('ADMIN','DRIVER')">
+            <button class="dropbtn">BOOKINGS ▼</button>
+            <div class="dropdown-content">
+                <a href="/bookings/new">Book a Car</a>
+                <a href="/bookings" sec:authorize="hasRole('ADMIN')">Bookings</a>
+            </div>
+        </div>
+
+        <div class="dropdown" sec:authorize="hasRole('ADMIN')">
+            <button class="dropbtn">DRIVERS ▼</button>
+            <div class="dropdown-content">
+                <a href="/drivers">Drivers</a>
+            </div>
+        </div>
+
+        <a href="/drivers/new" sec:authorize="hasAnyRole('APP_USER', 'ADMIN')">Become a Driver</a>
+
+        <form th:action="@{/login}" method="get" sec:authorize="!isAuthenticated()">
+            <button type="submit">Login</button>
+        </form>
+
+        <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

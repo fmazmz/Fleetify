@@ -1,4 +1,4 @@
-package org.example.springmvc.cars.repository;
+package org.example.springmvc.cars;
 
 import org.example.springmvc.cars.model.Car;
 import org.springframework.data.domain.Page;
@@ -31,4 +31,13 @@ AND (:year IS NULL OR c.year = :year)
 AND (:licencePlate IS NULL OR LOWER(c.licencePlate) LIKE :licencePlate)
 AND (:vin IS NULL OR LOWER(c.vin) LIKE :vin)
 """)
-    Page<Car> searchCars(String q, String make, String model, Year year, String licencePlate, String vin, Pageable pageable);}
+    Page<Car> searchCars(
+            String q,
+            String make,
+            String model,
+            Year year,
+            String licencePlate,
+            String vin,
+            Pageable pageable
+    );
+}

@@ -7,7 +7,6 @@ import java.util.UUID;
 
 public record DriverDTO(
         UUID id,
-        String email,
         String fname,
         String lname,
         String ssn,

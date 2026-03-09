@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/global.css}"/>
+</head>
+
+<body>
+
+<div style="display:flex; flex-direction:column; align-items:center;">
+    <h2>Login</h2>
+</div>
+
+<div th:if="${param.error}" class="error-message">
+    Invalid email or password
+</div>
+
+<div th:if="${param.logout}">
+    You have been logged out
+</div>
+
+<div style="display:flex; flex-direction:column; align-items:center;">
+
+    <form style="display:flex; flex-direction:column; gap:10px;"
+          th:action="@{/login}" method="post">
+
+        <div style="display:flex; gap:10px; align-items:center;">
+            <label style="width:120px;">Email</label>
+            <input type="text" name="username">
+        </div>
+
+        <div style="display:flex; gap:10px; align-items:center;">
+            <label style="width:120px;">Password</label>
+            <input type="password" name="password">
+        </div>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+    <form style="display:flex; flex-direction:column; margin-top: 10px"
+          th:action="@{/signup/new}" method="get">
+        <button type="submit">No account? Signup here!</button>
+    </form>
+
+</div>
+
+</body>
+</html>
