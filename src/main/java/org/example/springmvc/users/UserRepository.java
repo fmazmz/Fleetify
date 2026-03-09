@@ -1,5 +1,6 @@
 package org.example.springmvc.users;
 
+import org.example.springmvc.users.model.User;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 

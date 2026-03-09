@@ -1,7 +1,5 @@
-package org.example.springmvc.cars.service;
+package org.example.springmvc.cars;
 
-import org.example.springmvc.cars.mapper.CarMapper;
-import org.example.springmvc.cars.repository.CarRepository;
 import org.example.springmvc.cars.dto.CarDTO;
 import org.example.springmvc.cars.dto.CreateCarDTO;
 import org.example.springmvc.cars.model.Car;

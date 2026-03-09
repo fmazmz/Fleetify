@@ -1,4 +1,4 @@
-package org.example.springmvc.drivers.repository;
+package org.example.springmvc.drivers;
 
 import org.example.springmvc.drivers.model.Driver;
 import org.springframework.data.domain.Page;

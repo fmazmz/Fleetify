@@ -1,6 +1,7 @@
 package org.example.springmvc.users;
 
 import jakarta.validation.Valid;
+import org.example.springmvc.users.dto.CreateUserDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

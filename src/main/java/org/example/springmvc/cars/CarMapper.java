@@ -1,4 +1,4 @@
-package org.example.springmvc.cars.mapper;
+package org.example.springmvc.cars;
 
 import org.example.springmvc.cars.model.Car;
 import org.example.springmvc.cars.dto.CarDTO;

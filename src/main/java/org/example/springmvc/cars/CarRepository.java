@@ -1,4 +1,4 @@
-package org.example.springmvc.cars.repository;
+package org.example.springmvc.cars;
 
 import org.example.springmvc.cars.model.Car;
 import org.springframework.data.domain.Page;

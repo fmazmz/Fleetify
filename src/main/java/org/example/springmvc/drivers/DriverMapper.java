@@ -1,6 +1,6 @@
-package org.example.springmvc.drivers.mapper;
+package org.example.springmvc.drivers;
 
-import org.example.springmvc.cars.mapper.CarMapper;
+import org.example.springmvc.cars.CarMapper;
 import org.example.springmvc.drivers.dto.CreateDriverDTO;
 import org.example.springmvc.drivers.model.Driver;
 import org.example.springmvc.drivers.dto.DriverDTO;

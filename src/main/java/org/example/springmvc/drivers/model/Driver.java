@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.springmvc.cars.model.Car;
-import org.example.springmvc.users.User;
+import org.example.springmvc.users.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

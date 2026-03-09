@@ -1,5 +1,10 @@
 package org.example.springmvc.users;
 
+import org.example.springmvc.users.dto.CreateUserDTO;
+import org.example.springmvc.users.dto.UserDTO;
+import org.example.springmvc.users.model.User;
+import org.example.springmvc.users.model.UserRole;
+
 public class UserMapper {
     public static UserDTO toDto(User user) {
         return new UserDTO(

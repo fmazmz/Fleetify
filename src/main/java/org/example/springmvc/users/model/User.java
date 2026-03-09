@@ -1,4 +1,4 @@
-package org.example.springmvc.users;
+package org.example.springmvc.users.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

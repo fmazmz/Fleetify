@@ -3,7 +3,6 @@ package org.example.springmvc.cars;
 import jakarta.validation.Valid;
 import org.example.springmvc.cars.dto.CarDTO;
 import org.example.springmvc.cars.dto.CreateCarDTO;
-import org.example.springmvc.cars.service.CarService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;

@@ -1,4 +1,4 @@
-package org.example.springmvc.bookings.repository;
+package org.example.springmvc.bookings;
 
 import org.example.springmvc.bookings.model.Booking;
 import org.example.springmvc.insurances.InsuranceType;
@@ -9,7 +9,6 @@ import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository

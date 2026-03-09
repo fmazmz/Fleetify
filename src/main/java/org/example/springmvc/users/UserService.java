@@ -1,5 +1,8 @@
 package org.example.springmvc.users;
 
+import org.example.springmvc.users.dto.CreateUserDTO;
+import org.example.springmvc.users.model.User;
+import org.example.springmvc.users.model.UserRole;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,14 +1,12 @@
-package org.example.springmvc.drivers.service;
+package org.example.springmvc.drivers;
 
 import org.example.springmvc.auth.SecurityUtils;
 import org.example.springmvc.drivers.dto.CreateDriverDTO;
-import org.example.springmvc.drivers.mapper.DriverMapper;
 import org.example.springmvc.drivers.model.Driver;
 import org.example.springmvc.drivers.dto.DriverDTO;
-import org.example.springmvc.drivers.repository.DriverRepository;
-import org.example.springmvc.users.User;
+import org.example.springmvc.users.model.User;
 import org.example.springmvc.users.UserRepository;
-import org.example.springmvc.users.UserRole;
+import org.example.springmvc.users.model.UserRole;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package org.example.springmvc.users;
+package org.example.springmvc.users.dto;
 
 public record CreateUserDTO(
         String email,

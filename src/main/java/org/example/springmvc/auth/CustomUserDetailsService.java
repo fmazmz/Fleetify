@@ -1,6 +1,6 @@
 package org.example.springmvc.auth;
 
-import org.example.springmvc.users.User;
+import org.example.springmvc.users.model.User;
 import org.example.springmvc.users.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
