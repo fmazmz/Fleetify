@@ -31,8 +31,8 @@ public class UserController {
     public String signup(
             @Valid @ModelAttribute("user") CreateUserDTO user,
             BindingResult bindingResult,
-            RedirectAttributes redirectAttributes,
-            Model model) {
+            RedirectAttributes redirectAttributes
+    ) {
 
         if (bindingResult.hasErrors()) {
             return "users/signup";
