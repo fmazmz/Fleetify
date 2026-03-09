@@ -14,27 +14,56 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("cars")
 public class CarController {
+
     private final CarService carService;
-    public CarController(CarService carService) {this.carService = carService;}
+
+    public CarController(CarService carService) {
+        this.carService = carService;
+    }
 
     @GetMapping
-    public String listCars(@PageableDefault Pageable pageable, @ModelAttribute CarFilter filter, Model model) {
+    public String listCars(
+            @PageableDefault Pageable pageable,
+            @ModelAttribute CarFilter filter,
+            Model model
+    ) {
+
         var cars = carService.search(pageable, filter);
+
         model.addAttribute("cars", cars);
         model.addAttribute("filter", filter);
+
         return "cars/list";
     }
 
     @GetMapping("/new")
     public String getCreationForm(Model model) {
-        model.addAttribute("car", new CreateCarDTO(null, null, null, null, null, null));
-        return "cars/create";}
+        model.addAttribute(
+                "car",
+                new CreateCarDTO(null, null, null, null, null, null)
+        );
+
+        return "cars/create";
+    }
 
     @PostMapping
-    public String createCar(@Valid @ModelAttribute("car") CreateCarDTO car, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {return "cars/create";}
+    public String createCar(
+            @Valid @ModelAttribute("car") CreateCarDTO car,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+
+        if (bindingResult.hasErrors()) {
+            return "cars/create";
+        }
+
         carService.create(car);
-        redirectAttributes.addFlashAttribute("success", "Car created successfully!");
+
+        redirectAttributes.addFlashAttribute(
+                "success",
+                "Car created successfully!"
+        );
+
         return "redirect:/cars";
     }
 }

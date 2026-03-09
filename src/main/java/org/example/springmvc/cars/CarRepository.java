@@ -7,18 +7,34 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.Instant;
 import java.time.Year;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface CarRepository extends ListCrudRepository<Car, UUID> {
-    Page<Car> findAll(Pageable pageable);
+
     Optional<Car> findByVinIgnoreCase(String vin);
+
     Optional<Car> findByLicencePlateIgnoreCase(String licencePlate);
 
     @Query("""
-            SELECT c FROM Car c WHERE (
+SELECT c
+FROM Car c
+WHERE NOT EXISTS (
+    SELECT b
+    FROM Booking b
+    WHERE b.car = c
+    AND b.startTime < :endTime
+    AND b.endTime > :startTime
+)
+""")
+    List<Car> findAvailableCars(Instant startTime, Instant endTime);
+
+    @Query("""
+SELECT c FROM Car c WHERE (
       :q IS NULL OR
       LOWER(c.make) LIKE :q OR
       LOWER(c.model) LIKE :q OR

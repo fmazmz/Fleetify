@@ -7,9 +7,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.List;
+
 
 @Service
 public class CarService {
+
     private final CarRepository repository;
 
     public CarService(CarRepository repository) {
@@ -28,28 +32,38 @@ public class CarService {
         ).map(CarMapper::toDto);
     }
 
-    private String wildcard(String value) {
-        if (value == null || value.isBlank()) {
-            return null;
-        }
-        return "%" + value.trim().toLowerCase() + "%";
+    public List<CarDTO> findAvailable(Instant startTime, Instant endTime) {
+        return repository.findAvailableCars(startTime, endTime)
+                .stream()
+                .map(CarMapper::toDto)
+                .toList();
     }
 
     public void create(CreateCarDTO dto) {
 
-        if (repository.findByLicencePlateIgnoreCase(dto.licencePlate().trim()).isPresent()) {
+        String plate = dto.licencePlate().trim();
+        String vin = dto.vin().trim();
+
+        if (repository.findByLicencePlateIgnoreCase(plate).isPresent()) {
             throw new IllegalArgumentException(
-                    "A car with license plate '" + dto.licencePlate() + "' already exists."
+                    "A car with license plate '" + plate + "' already exists."
             );
         }
 
-        if (repository.findByVinIgnoreCase(dto.vin().trim()).isPresent()) {
+        if (repository.findByVinIgnoreCase(vin).isPresent()) {
             throw new IllegalArgumentException(
-                    "A car with VIN '" + dto.vin() + "' already exists."
+                    "A car with VIN '" + vin + "' already exists."
             );
         }
 
         Car car = CarMapper.fromDto(dto);
         repository.save(car);
+    }
+
+    private String wildcard(String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+        return "%" + value.trim().toLowerCase() + "%";
     }
 }
