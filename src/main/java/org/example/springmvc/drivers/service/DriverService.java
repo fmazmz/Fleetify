@@ -1,5 +1,6 @@
 package org.example.springmvc.drivers.service;
 
+import org.example.springmvc.auth.SecurityUtils;
 import org.example.springmvc.drivers.dto.CreateDriverDTO;
 import org.example.springmvc.drivers.mapper.DriverMapper;
 import org.example.springmvc.drivers.model.Driver;
@@ -19,10 +20,12 @@ import java.util.UUID;
 public class DriverService {
     private final DriverRepository driverRepository;
     private final UserRepository userRepository;
+    private final SecurityUtils securityUtils;
 
-    public DriverService(DriverRepository driverRepository, UserRepository userRepository) {
+    public DriverService(DriverRepository driverRepository, UserRepository userRepository, SecurityUtils securityUtils) {
         this.driverRepository = driverRepository;
         this.userRepository = userRepository;
+        this.securityUtils = securityUtils;
     }
 
     public Driver becomeDriver(UUID userId, CreateDriverDTO dto) {
@@ -46,6 +49,7 @@ public class DriverService {
         user.setRole(UserRole.DRIVER);
         userRepository.save(user);
 
+        securityUtils.refreshAuthentication(user.getEmail());
         return driver;
     }
 

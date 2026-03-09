@@ -1,4 +1,5 @@
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,22 +11,27 @@
 <div style="display: flex; flex-direction: column; align-items: center;">
     <h1>Fleetify</h1>
 </div>
+<div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
+    <a href="/drivers/new" sec:authorize="hasRole('APP_USER')" style="font-weight: bold; font-size: 1.2em;">
+        Become a Driver
+    </a>
+</div>
 <div style="display: flex; justify-content: center; gap: 40px; text-align: center; margin-top: 0px">
 
     <div style="display: flex; flex-direction: column; align-items: center;">
         <p>CARS</p>
         <a href="/cars">Browse Cars</a>
-        <a href="/cars/new">Add New Car</a>
+        <a href="/cars/new" sec:authorize="hasRole('ADMIN')">Add New Car</a>
     </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
         <p>BOOKINGS</p>
-        <a href="/bookings/new">Book a Car</a>
-        <a href="/bookings">Bookings</a>
+        <a href="/bookings/new" sec:authorize="hasRole('DRIVER')">Book a Car</a>
+        <a href="/bookings" sec:authorize="hasRole('ADMIN')">Bookings</a>
 
     </div>
     <div style="display: flex; flex-direction: column; align-items: center;">
         <p>DRIVERS</p>
-        <a href="/drivers">Drivers</a>
+        <a href="/drivers" sec:authorize="hasRole('ADMIN')">Drivers</a>
     </div>
 </div>
 </body>
