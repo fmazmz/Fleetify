@@ -11,11 +11,13 @@ import org.example.springmvc.users.model.UserRole;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class DriverService {
     private final DriverRepository driverRepository;
     private final UserRepository userRepository;
@@ -46,21 +48,23 @@ public class DriverService {
 
         user.setDriver(driver);
         user.setRole(UserRole.DRIVER);
-        userRepository.save(user);
 
         securityUtils.refreshAuthentication(user.getEmail());
         return driver;
     }
 
+    @Transactional(readOnly = true)
     public List<Driver> getAll() {
         return driverRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Page<DriverDTO> getAllPageable(Pageable pageable) {
         return driverRepository.findAll(pageable)
                 .map(DriverMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
     public DriverDTO getById(UUID driverId) {
         Driver driver = driverRepository.findById(driverId)
                 .orElseThrow(() -> new IllegalArgumentException("Driver not found"));
@@ -76,7 +80,6 @@ public class DriverService {
         }
 
         DriverMapper.updateEntity(driver, dto);
-        driverRepository.save(driver);
     }
 
     public void delete(UUID driverId) {
@@ -85,6 +88,7 @@ public class DriverService {
         driverRepository.delete(driver);
     }
 
+    @Transactional(readOnly = true)
     public Page<DriverDTO> search(Pageable pageable, DriverFilter filter) {
         UUID driverId = null;
         if (filter.driverId() != null && !filter.driverId().isBlank()) {

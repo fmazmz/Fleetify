@@ -13,12 +13,14 @@ import org.example.springmvc.insurances.CarInsurance;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class BookingService {
     private final BookingRepository repository;
     private final CarRepository carRepository;
@@ -37,6 +39,7 @@ public class BookingService {
         this.insurance = insurance;
     }
 
+    @Transactional(readOnly = true)
     public Page<BookingDTO> search(Pageable pageable, BookingFilter filter) {
         return repository.searchBookings(
                 filter.carId(),
@@ -46,6 +49,7 @@ public class BookingService {
         ).map(BookingMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
     public BookingDTO getById(UUID id) {
         Booking booking = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Booking not found"));
@@ -96,7 +100,6 @@ public class BookingService {
         BigDecimal total = carCost.add(insuranceCost);
         BookingMapper.updateEntity(booking, car, driver, dto, total);
 
-        repository.save(booking);
     }
 
     public void delete(UUID id) {
