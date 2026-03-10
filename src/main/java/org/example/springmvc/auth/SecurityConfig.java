@@ -37,6 +37,8 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .permitAll()
+                )
+                .csrf(csrf -> csrf
                 );
 
         return http.build();
