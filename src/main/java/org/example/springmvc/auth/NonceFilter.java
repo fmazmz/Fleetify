@@ -4,6 +4,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -12,6 +13,7 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 @Component
+@Order(1)
 public class NonceFilter extends OncePerRequestFilter {
 
     private static final SecureRandom secureRandom = new SecureRandom();
@@ -32,7 +34,9 @@ public class NonceFilter extends OncePerRequestFilter {
         response.setHeader("Content-Security-Policy",
                 "default-src 'self'; " +
                         "script-src 'self' 'nonce-" + nonce + "'; " +
-                        "style-src 'self';");
+                        "style-src 'self'; " +
+                        "object-src 'none'; " +
+                        "base-uri 'self';");
 
         filterChain.doFilter(request, response);
     }
