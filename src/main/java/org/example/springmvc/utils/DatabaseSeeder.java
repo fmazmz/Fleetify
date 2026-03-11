@@ -1,6 +1,6 @@
 package org.example.springmvc.utils;
 
-import org.example.springmvc.bookings.BookingService;
+import org.example.springmvc.bookings.BookingServiceImpl;
 import org.example.springmvc.bookings.dto.CreateBookingDTO;
 import org.example.springmvc.cars.CarRepository;
 import org.example.springmvc.cars.model.Car;
@@ -28,11 +28,11 @@ public class DatabaseSeeder implements CommandLineRunner {
     private final UserService userService;
     private final UserRepository userRepository;
     private final DriverService driverService;
-    private final BookingService bookingService;
+    private final BookingServiceImpl bookingService;
     private final CarRepository carRepository;
 
     public DatabaseSeeder(UserService userService, UserRepository userRepository, DriverService driverService,
-                          BookingService bookingService, CarRepository carRepository) {
+                          BookingServiceImpl bookingService, CarRepository carRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.driverService = driverService;

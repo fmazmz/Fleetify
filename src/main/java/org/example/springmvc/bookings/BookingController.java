@@ -28,12 +28,12 @@ import java.util.UUID;
 @RequestMapping("bookings")
 public class BookingController {
 
-    private final BookingService bookingService;
+    private final BookingServiceImpl bookingService;
     private final CarService carService;
     private final DriverService driverService;
     private final UserService userService;
 
-    public BookingController(BookingService bookingService, CarService carService, DriverService driverService, UserService userService) {
+    public BookingController(BookingServiceImpl bookingService, CarService carService, DriverService driverService, UserService userService) {
         this.bookingService = bookingService;
         this.carService = carService;
         this.driverService = driverService;
