@@ -1,0 +1,51 @@
+/* Table and List Page Styles */
+
+/* List page container */
+.list-container {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 0px;
+}
+
+/* Data table */
+.data-table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+/* Table header cells */
+.data-table th {
+    border: 1px solid black;
+    padding: 8px 16px;
+    background-color: black;
+    color: white;
+}
+
+/* Table data cells */
+.data-table td {
+    border: 1px solid black;
+    padding: 8px 16px;
+}
+
+/* Pagination container */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Success message */
+.success-message {
+    margin-top: 20px;
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}
+
+/* Empty state message */
+.empty-state {
+    margin-top: 20px;
+}
+

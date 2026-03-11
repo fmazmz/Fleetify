@@ -4,36 +4,25 @@
     <title>Cars</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link type="text/css" rel="stylesheet" th:href="@{/css/global.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/tables.css}"/>
 </head>
 <body>
 
-<div style="display: flex; text-align: center; align-items: center; flex-direction: column; margin-top: 0px">
+<div class="page-header">
     <h2>Cars</h2>
 </div>
 
-<div style="display: flex; text-align: center; align-items: center; flex-direction: column; margin-top: 0px">
+<div class="list-container">
 
-    <table style="border-collapse: collapse; border: 1px solid black; margin: 0 auto;">
+    <table class="data-table">
         <thead>
         <tr>
-            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
-                Make
-            </th>
-            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
-                Model
-            </th>
-            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
-                Hourly Price
-            </th>
-            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
-                Licence Plate
-            </th>
-            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
-                VIN
-            </th>
-            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
-                Year
-            </th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Hourly Price</th>
+            <th>Licence Plate</th>
+            <th>VIN</th>
+            <th>Year</th>
         </tr>
         </thead>
         <tbody>
@@ -50,7 +39,7 @@
         </tbody>
     </table>
 </div>
-<div style="margin-top:20px; text-align:center;">
+<div class="pagination">
 
     <a th:if="${cars.hasPrevious()}"
        th:href="${make != null and !make.isEmpty()} ?
@@ -73,8 +62,7 @@
 
 </div>
 
-<div th:if="${success}"
-     style="margin-top: 20px; text-align: center; color: green; font-weight: bold;">
+<div th:if="${success}" class="success-message">
     <span th:text="${success}"></span>
 </div>
 

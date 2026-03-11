@@ -4,36 +4,25 @@
     <title>Bookings</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link type="text/css" rel="stylesheet" th:href="@{/css/global.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/tables.css}"/>
 </head>
 <body>
 
-<div style="display: flex; text-align: center; align-items: center; flex-direction: column; margin-top: 0px">
+<div class="page-header">
     <h2>Bookings</h2>
 </div>
 
-<div style="display: flex; text-align: center; align-items: center; flex-direction: column; margin-top: 0px">
+<div class="list-container">
 
-    <table style="border-collapse: collapse; border: 1px solid black; margin: 0 auto;">
+    <table class="data-table">
         <thead>
         <tr>
-            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
-                Driver
-            </th>
-            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
-                Car
-            </th>
-            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
-                Start Time
-            </th>
-            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
-                End Time
-            </th>
-            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
-                Insurance
-            </th>
-            <th style="border: 1px solid black; padding: 8px 16px; background-color: black; color: white;">
-                Total Price
-            </th>
+            <th>Driver</th>
+            <th>Car</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Insurance</th>
+            <th>Total Price</th>
         </tr>
         </thead>
         <tbody>
@@ -50,7 +39,7 @@
         </tbody>
     </table>
 </div>
-<div style="margin-top:20px; text-align:center;">
+<div class="pagination">
 
     <a th:if="${bookings.hasPrevious()}"
        th:href="@{/bookings(page=${bookings.number-1})}">
@@ -69,8 +58,7 @@
 
 </div>
 
-<div th:if="${success}"
-     style="margin-top: 20px; text-align: center; color: green; font-weight: bold;">
+<div th:if="${success}" class="success-message">
     <span th:text="${success}"></span>
 </div>
 

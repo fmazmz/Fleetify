@@ -1,0 +1,146 @@
+    /* Form Styles */
+
+/* Page header - centered title */
+.page-header {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 0px;
+}
+
+/* Form container - centered form wrapper */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+/* Simple form container for basic forms */
+.form-container-simple {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 0px;
+}
+
+/* Form layout */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Simple form layout (for login, signup, basic create forms) */
+form.form-simple {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Form field row */
+.form-field {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-top: 15px;
+}
+
+/* Simple form field row (for login, signup, basic create forms) */
+.form-field-simple {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Form field label */
+.form-field label {
+    width: 120px;
+    font-weight: bold;
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.form-field-simple label {
+    width: 120px;
+}
+
+/* Form field input container */
+.form-field-input {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.form-field-simple .form-field-input {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form inputs and selects */
+select, input {
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button-container-simple {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+/* Login/Signup specific styles */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-field {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.login-field label {
+    width: 120px;
+}
+
+.login-button-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+

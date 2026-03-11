@@ -5,71 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fleetify - Book a Car</title>
     <link type="text/css" rel="stylesheet" th:href="@{/css/global.css}"/>
-    <style>
-        .form-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 30px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .form-field {
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-            margin-top: 15px;
-        }
-
-        .form-field label {
-            width: 120px;
-            font-weight: bold;
-            margin-top: 5px;
-            flex-shrink: 0;
-        }
-
-        .form-field-input {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-
-        select, input {
-            padding: 5px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: black;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #333;
-        }
-
-        .field-error {
-            color: red;
-            font-size: 0.9em;
-            margin-top: 3px;
-        }
-    </style>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/forms.css}"/>
 </head>
 <body>
 <div th:if="${error}" class="error-message" th:text="${error}">
@@ -148,7 +84,7 @@
         </div>
     </form>
 
-    <div th:if="${cars != null and #lists.isEmpty(cars)}" style="margin-top: 20px;">
+    <div th:if="${cars != null and #lists.isEmpty(cars)}" class="empty-state">
         No cars available for the selected time range.
     </div>
 </div>
