@@ -5,6 +5,10 @@ import org.example.springmvc.drivers.dto.CreateDriverDTO;
 import org.example.springmvc.drivers.dto.UpdateDriverDTO;
 import org.example.springmvc.drivers.model.Driver;
 import org.example.springmvc.drivers.dto.DriverDTO;
+import org.example.springmvc.exceptions.DuplicateEntityException;
+import org.example.springmvc.exceptions.EntityNotFoundException;
+import org.example.springmvc.exceptions.ErrorMessages;
+import org.example.springmvc.exceptions.UnauthorizedActionException;
 import org.example.springmvc.users.model.User;
 import org.example.springmvc.users.UserRepository;
 import org.example.springmvc.users.model.UserRole;
@@ -32,14 +36,16 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public Driver becomeDriver(UUID userId, CreateDriverDTO dto) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format(ErrorMessages.USER_NOT_FOUND_ID, userId)
+                ));
 
         if (user.getDriver() != null) {
-            throw new IllegalStateException("User is already a driver");
+            throw new UnauthorizedActionException(ErrorMessages.USER_ALREADY_DRIVER);
         }
 
         if (driverRepository.findBySsn(dto.ssn()).isPresent()) {
-            throw new IllegalArgumentException("Driver with this SSN already exists");
+            throw new DuplicateEntityException(ErrorMessages.DRIVER_SSN_EXISTS);
         }
 
         Driver driver = DriverMapper.fromDto(dto);
@@ -71,17 +77,21 @@ public class DriverServiceImpl implements DriverService {
     @Transactional(readOnly = true)
     public DriverDTO getById(UUID driverId) {
         Driver driver = driverRepository.findById(driverId)
-                .orElseThrow(() -> new IllegalArgumentException("Driver not found"));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format(ErrorMessages.DRIVER_NOT_FOUND_ID, driverId)
+                ));
         return DriverMapper.toDto(driver);
     }
 
     @Override
     public void update(UUID driverId, UpdateDriverDTO dto) {
         Driver driver = driverRepository.findById(driverId)
-                .orElseThrow(() -> new IllegalArgumentException("Driver not found"));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format(ErrorMessages.DRIVER_NOT_FOUND_ID, driverId)
+                ));
 
         if (!driver.getSsn().equals(dto.ssn()) && driverRepository.findBySsn(dto.ssn()).isPresent()) {
-            throw new IllegalArgumentException("SSN already exists");
+            throw new DuplicateEntityException(ErrorMessages.DRIVER_SSN_EXISTS);
         }
 
         DriverMapper.updateEntity(driver, dto);
@@ -90,7 +100,9 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public void delete(UUID driverId) {
         Driver driver = driverRepository.findById(driverId)
-                .orElseThrow(() -> new IllegalArgumentException("Driver not found"));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format(ErrorMessages.DRIVER_NOT_FOUND_ID, driverId)
+                ));
         driverRepository.delete(driver);
     }
 

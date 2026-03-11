@@ -4,6 +4,9 @@ import org.example.springmvc.cars.dto.CarDTO;
 import org.example.springmvc.cars.dto.CreateCarDTO;
 import org.example.springmvc.cars.dto.UpdateCarDTO;
 import org.example.springmvc.cars.model.Car;
+import org.example.springmvc.exceptions.DuplicateEntityException;
+import org.example.springmvc.exceptions.EntityNotFoundException;
+import org.example.springmvc.exceptions.ErrorMessages;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,14 +30,14 @@ public class CarServiceImpl implements CarService {
         String vin = dto.vin().trim();
 
         if (repository.findByLicencePlateIgnoreCase(plate).isPresent()) {
-            throw new IllegalArgumentException(
-                    "A car with license plate '" + plate + "' already exists."
+            throw new DuplicateEntityException(
+                    String.format(ErrorMessages.CAR_DUPLICATE_VIN, vin)
             );
         }
 
         if (repository.findByVinIgnoreCase(vin).isPresent()) {
-            throw new IllegalArgumentException(
-                    "A car with VIN '" + vin + "' already exists."
+            throw new DuplicateEntityException(
+                    String.format(ErrorMessages.CAR_DUPLICATE_VIN, vin)
             );
         }
         Car car = CarMapper.fromDto(dto);
@@ -65,27 +68,31 @@ public class CarServiceImpl implements CarService {
     @Override
     public CarDTO getById(UUID id) {
         Car car = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Car not found with id " + id));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format(ErrorMessages.CAR_NOT_FOUND_ID, id)
+                ));
         return CarMapper.toDto(car);
     }
 
     @Override
     public void update(UUID id, UpdateCarDTO dto) {
         Car car = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Car not found with id " + id));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format(ErrorMessages.CAR_NOT_FOUND_ID, id)
+                ));
 
         String plate = dto.licencePlate().trim();
         String vin = dto.vin().trim();
 
         if (repository.existsByLicencePlateIgnoreCaseAndIdNot(plate, id)) {
-            throw new IllegalArgumentException(
-                    "Another car with license plate '" + plate + "' already exists."
+            throw new DuplicateEntityException(
+                    String.format(ErrorMessages.CAR_DUPLICATE_PLATE, plate)
             );
         }
 
         if (repository.existsByVinIgnoreCaseAndIdNot(vin, id)) {
-            throw new IllegalArgumentException(
-                    "Another car with VIN '" + vin + "' already exists."
+            throw new DuplicateEntityException(
+                    String.format(ErrorMessages.CAR_DUPLICATE_VIN, vin)
             );
         }
         CarMapper.updateEntity(car, dto);
@@ -95,7 +102,9 @@ public class CarServiceImpl implements CarService {
     @Override
     public void delete(UUID id) {
         Car car = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Car not found with id " + id));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format(ErrorMessages.CAR_NOT_FOUND_ID, id)
+                ));
         repository.delete(car);
     }
 
