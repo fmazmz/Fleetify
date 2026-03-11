@@ -173,6 +173,22 @@ public class BookingController {
         return "redirect:/bookings";
     }
 
+    @PostMapping("my-bookings/{id}/delete")
+    public String deleteMyBooking(@PathVariable UUID id,
+                                  RedirectAttributes redirectAttributes) {
+
+        User user = userService.getCurrentUser();
+        Driver driver = user.getDriver();
+
+        if (driver == null) {
+            throw new IllegalArgumentException("You are not registered as a driver");
+        }
+
+        bookingService.deleteByDriver(id, driver.getId());
+        redirectAttributes.addFlashAttribute("success", "Booking cancelled");
+        return "redirect:/bookings/my-bookings";
+    }
+
     private Map<InsuranceType, String> insuranceDisplayNames() {
         return Map.of(
                 InsuranceType.BASIC, "Basic",

@@ -7,6 +7,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 public record BookingDTO(
+        UUID id,
         UUID driverId,
         UUID carId,
         String carMake,
