@@ -20,10 +20,10 @@ import java.util.UUID;
 @RequestMapping("drivers")
 public class DriverController {
 
-    private final DriverService driverService;
+    private final DriverServiceImpl driverService;
     private final UserService userService;
 
-    public DriverController(DriverService driverService, UserService userService) {
+    public DriverController(DriverServiceImpl driverService, UserService userService) {
         this.driverService = driverService;
         this.userService = userService;
     }

@@ -14,7 +14,7 @@ import java.util.UUID;
 
 
 @Service
-public class CarServiceImpl implements CarService{
+public class CarServiceImpl implements CarService {
     private final CarRepository repository;
 
     public CarServiceImpl(CarRepository repository) {

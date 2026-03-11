@@ -6,7 +6,7 @@ import org.example.springmvc.bookings.dto.CreateBookingDTO;
 import org.example.springmvc.bookings.dto.UpdateBookingDTO;
 import org.example.springmvc.bookings.model.BookingFilter;
 import org.example.springmvc.cars.CarServiceImpl;
-import org.example.springmvc.drivers.DriverService;
+import org.example.springmvc.drivers.DriverServiceImpl;
 import org.example.springmvc.drivers.model.Driver;
 import org.example.springmvc.insurances.InsuranceType;
 import org.example.springmvc.users.UserService;
@@ -30,10 +30,10 @@ public class BookingController {
 
     private final BookingServiceImpl bookingService;
     private final CarServiceImpl carService;
-    private final DriverService driverService;
+    private final DriverServiceImpl driverService;
     private final UserService userService;
 
-    public BookingController(BookingServiceImpl bookingService, CarServiceImpl carService, DriverService driverService, UserService userService) {
+    public BookingController(BookingServiceImpl bookingService, CarServiceImpl carService, DriverServiceImpl driverService, UserService userService) {
         this.bookingService = bookingService;
         this.carService = carService;
         this.driverService = driverService;
