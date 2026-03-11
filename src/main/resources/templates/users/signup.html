@@ -4,34 +4,35 @@
     <title>Signup</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link type="text/css" rel="stylesheet" th:href="@{/css/global.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/forms.css}"/>
 </head>
 <body>
-<div style="display: flex; text-align: center; align-items: center; flex-direction: column; margin-top: 0px">
+<div class="page-header">
     <h2>Create a Fleetify account</h2>
 </div>
 <div th:if="${error}" class="error-message" th:text="${error}">
 </div>
-<div style="display: flex; text-align: center; align-items: center; flex-direction: column; margin-top: 0px">
+<div class="form-container-simple">
 
-    <form style="display:flex; flex-direction:column; gap:10px;" th:action="@{/signup}" th:object="${user}" method="post">
+    <form class="form-simple" th:action="@{/signup}" th:object="${user}" method="post">
 
-        <div style="display:flex; gap:10px; align-items:center;">
-            <label for="email" style="width:120px;">Email</label>
-            <div style="display:flex; flex-direction:column;">
+        <div class="form-field-simple">
+            <label for="email">Email</label>
+            <div class="form-field-input">
                 <input type="text" id="email" th:field="*{email}">
                 <span class="field-error" th:errors="*{email}"></span>
             </div>
         </div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-            <label for="password" style="width:120px;">Password</label>
-            <div style="display:flex; flex-direction:column;">
+        <div class="form-field-simple">
+            <label for="password">Password</label>
+            <div class="form-field-input">
                 <input type="password" id="password" th:field="*{password}">
                 <span class="field-error" th:errors="*{password}"></span>
             </div>
         </div>
 
-        <div style ="display: flex; align-items: center; flex-direction: column; margin-top:10px; width:100%;">
+        <div class="button-container-simple">
             <button type="submit">Create Account</button>
         </div>
     </form>

@@ -4,11 +4,12 @@
     <title>Login</title>
     <meta charset="UTF-8"/>
     <link type="text/css" rel="stylesheet" th:href="@{/css/global.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/forms.css}"/>
 </head>
 
 <body>
 
-<div style="display:flex; flex-direction:column; align-items:center;">
+<div class="page-header">
     <h2>Login</h2>
 </div>
 
@@ -20,19 +21,19 @@
     You have been logged out
 </div>
 
-<div style="display:flex; flex-direction:column; align-items:center;">
+<div class="login-container">
 
-    <form style="display:flex; flex-direction:column; gap:10px;"
+    <form class="login-form"
           th:action="@{/login}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-        <div style="display:flex; gap:10px; align-items:center;">
-            <label style="width:120px;">Email</label>
+        <div class="login-field">
+            <label>Email</label>
             <input type="text" name="username">
         </div>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-            <label style="width:120px;">Password</label>
+        <div class="login-field">
+            <label>Password</label>
             <input type="password" name="password">
         </div>
 
@@ -40,7 +41,7 @@
 
     </form>
 
-    <form style="display:flex; flex-direction:column; margin-top: 10px"
+    <form class="login-button-container"
           th:action="@{/signup/new}" method="get">
         <button type="submit">No account? Signup here!</button>
     </form>
