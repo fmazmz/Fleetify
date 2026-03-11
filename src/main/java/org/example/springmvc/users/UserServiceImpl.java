@@ -1,5 +1,6 @@
 package org.example.springmvc.users;
 
+import org.example.springmvc.exceptions.DuplicateEntityException;
 import org.example.springmvc.users.dto.CreateUserDTO;
 import org.example.springmvc.users.model.User;
 import org.example.springmvc.users.model.UserRole;
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void create(CreateUserDTO dto) {
         if (repository.existsByEmail(dto.email())) {
-            throw new IllegalArgumentException("Unable to create an account with this email");
+            throw new DuplicateEntityException("Unable to create an account with this email");
         }
 
         String encryptedPassword = passwordEncoder.encode(dto.password());
