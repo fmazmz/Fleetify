@@ -125,14 +125,38 @@ html {
 }
 
 /* Background image for index page */
-body {
-    background-image: url('/images/cars.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
     overflow-x: hidden;
 }
+
+body {
+    min-height: 100vh;
+    background-image: url('/images/CarBackground.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+body.home-page {
+    background: none;
+    position: relative;
+    min-height: 100vh;
+}
+
+.home-background {
+    position: fixed;
+    inset: 0;
+    background-image: url('/images/FrontPic.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
 /* --- Navbar isolation: ensure no page-level CSS overrides navbar styling --- */
 .navbar form {
     display: inline-flex;
