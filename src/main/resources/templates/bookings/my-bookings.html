@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/tables.css}"/>
 </head>
 <body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <div class="page-header">
     <h2>My Bookings</h2>
@@ -51,7 +52,7 @@
 <div class="pagination">
 
     <a th:if="${bookings.hasPrevious()}"
-       th:href="@{/bookings/my-bookings(page=${bookings.number-1})}">
+       th:href="@{/bookings/my-bookings(page=${bookings.number-1}, sort=${param.sort})}">
         Previous
     </a>
 
@@ -61,7 +62,7 @@
     </span>
 
     <a th:if="${bookings.hasNext()}"
-       th:href="@{/bookings/my-bookings(page=${bookings.number+1})}">
+       th:href="@{/bookings/my-bookings(page=${bookings.number+1}, sort=${param.sort})}">
         Next
     </a>
 

@@ -28,8 +28,10 @@
     margin-top: 0px;
 }
 
-/* Form layout */
-form {
+/* Form layout – scoped to page content, not navbar */
+.form-container form,
+.form-container-simple form,
+.login-container form {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -82,8 +84,13 @@ form.form-simple {
     flex-direction: column;
 }
 
-/* Form inputs and selects */
-select, input {
+/* Form inputs and selects – scoped to page content, not navbar */
+.form-container select,
+.form-container input,
+.form-container-simple select,
+.form-container-simple input,
+.login-container select,
+.login-container input {
     padding: 5px;
     width: 100%;
     box-sizing: border-box;
@@ -104,8 +111,14 @@ select, input {
     width: 100%;
 }
 
-/* Buttons */
-button {
+/* Buttons – scoped to page content, not navbar */
+.form-container button,
+.form-container-simple button,
+.login-container button,
+.button-container button,
+.button-container-simple button,
+.data-table button,
+.login-button-container button {
     padding: 10px 20px;
     background-color: black;
     color: white;
@@ -113,7 +126,13 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.form-container button:hover,
+.form-container-simple button:hover,
+.login-container button:hover,
+.button-container button:hover,
+.button-container-simple button:hover,
+.data-table button:hover,
+.login-button-container button:hover {
     background-color: #333;
 }
 
@@ -145,4 +164,3 @@ button:hover {
     flex-direction: column;
     margin-top: 10px;
 }
-

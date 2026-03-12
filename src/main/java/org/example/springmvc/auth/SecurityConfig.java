@@ -23,6 +23,7 @@ public class SecurityConfig {
 
                         .requestMatchers("/cars/new").hasRole("ADMIN")
                         .requestMatchers("/cars").hasAnyRole("ADMIN", "DRIVER", "APP_USER")
+                        .requestMatchers("/cars/**").hasRole("ADMIN")
 
                         .requestMatchers("/drivers/new").hasRole("APP_USER")
                         .requestMatchers("/drivers/**").hasRole("ADMIN")
