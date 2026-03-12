@@ -26,7 +26,6 @@
             <div class="dropdown-content">
                 <a th:href="@{/bookings/new}" sec:authorize="hasRole('DRIVER')">Book a Car</a>
                 <a th:href="@{/bookings/my-bookings}" sec:authorize="hasRole('DRIVER')">My bookings</a>
-                <!-- Bara ADMIN kan se "Bookings" (alla bokningar) -->
                 <a th:href="@{/bookings}" sec:authorize="hasRole('ADMIN')">Bookings</a>
             </div>
         </div>
