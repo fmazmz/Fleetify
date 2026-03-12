@@ -1,12 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&display=swap");
 
-/* Global Font */
 html {
     font-family: 'IBM Plex Mono', monospace;
     overflow-x: hidden;
 }
 
-/* Error Messages */
 .error-message {
     background-color: #fee;
     border: 1px solid #fcc;
@@ -23,7 +21,6 @@ html {
     margin-left: 10px;
 }
 
-/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -37,9 +34,10 @@ html {
     margin: 15px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1000;
 }
 
-/* Left: Fleetify logo - vit text */
 .navbar-left h1 {
     margin: 0;
     color: white;
@@ -56,14 +54,12 @@ html {
     color: white;
 }
 
-/* Right: buttons and dropdowns */
 .navbar-right {
     display: flex;
     gap: 12px;
     align-items: center;
 }
 
-/* Links and buttons */
 .navbar-right a {
     color: white;
     text-decoration: none;
@@ -90,13 +86,11 @@ html {
     margin: 0;
 }
 
-/* Dropdown container */
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* Dropdown button */
 .dropbtn {
     background-color: transparent;
     color: white;
@@ -114,7 +108,6 @@ html {
     border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* Dropdown content */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -124,13 +117,12 @@ html {
     min-width: 180px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     border-radius: 10px;
-    z-index: 1000;
+    z-index: 1001;
     flex-direction: column;
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 5px 0;
 }
 
-/* Links inside the dropdown */
 .dropdown-content a {
     color: white;
     padding: 10px 16px;
@@ -147,12 +139,10 @@ html {
     border: none;
 }
 
-/* Show dropdown on hover */
 .dropdown:hover .dropdown-content {
     display: flex;
 }
 
-/* Background image for index page */
 html, body {
     margin: 0;
     padding: 0;
@@ -167,6 +157,7 @@ body {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    padding-top: 20px;
 }
 
 body.home-page {
@@ -185,7 +176,6 @@ body.home-page {
     z-index: -1;
 }
 
-/* --- Navbar isolation: ensure no page-level CSS overrides navbar styling --- */
 .navbar form {
     display: inline-flex;
     align-items: center;
@@ -216,7 +206,6 @@ body.home-page {
     border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* Transparent Floating Login Form */
 .floating-login {
     position: absolute;
     top: 50%;
@@ -374,7 +363,257 @@ body.home-page {
     border-bottom-color: white;
 }
 
-/* Responsive adjustments */
+.bookings-wrapper {
+    max-width: 1200px;
+    margin: 80px auto 30px;
+    padding: 0 20px;
+}
+
+.bookings-card {
+    background: rgba(20, 20, 20, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.bookings-title {
+    color: white;
+    font-size: 32px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.booking-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.booking-form .form-group {
+    margin-bottom: 25px;
+}
+
+.booking-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.booking-form input,
+.booking-form select {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: white;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.booking-form input:focus,
+.booking-form select:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.booking-form input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.booking-form select option {
+    background: #1a1a1a;
+    color: white;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'IBM Plex Mono', monospace;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 20px;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-secondary {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-danger {
+    background: rgba(255, 80, 80, 0.2);
+    border-color: rgba(255, 80, 80, 0.3);
+}
+
+.btn-danger:hover {
+    background: rgba(255, 80, 80, 0.3);
+    border-color: rgba(255, 80, 80, 0.5);
+}
+
+.table-container {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+}
+
+.bookings-table th {
+    padding: 16px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.bookings-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.bookings-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.pagination-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 30px 0 10px;
+}
+
+.pagination-nav a {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.pagination-nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.pagination-nav span {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+.detail-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.detail-row {
+    display: flex;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-label {
+    flex: 0 0 150px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.detail-value {
+    flex: 1;
+    color: white;
+    font-size: 16px;
+}
+
+.detail-value.price {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.message {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.message.success {
+    background: rgba(80, 255, 80, 0.15);
+    border: 1px solid rgba(80, 255, 80, 0.3);
+    color: #b3ffb3;
+}
+
+.message.error {
+    background: rgba(255, 80, 80, 0.15);
+    border: 1px solid rgba(255, 80, 80, 0.3);
+    color: #ffb3b3;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+body.home-page .bookings-wrapper {
+    margin-top: 100px;
+}
+
 @media (max-width: 768px) {
     .floating-login {
         width: 95%;
@@ -399,5 +638,28 @@ body.home-page {
     .dropbtn {
         padding: 6px 10px;
         font-size: 0.85em;
+    }
+
+    .bookings-wrapper {
+        margin: 70px 10px 20px;
+        padding: 0 10px;
+    }
+
+    .bookings-card {
+        padding: 20px;
+    }
+
+    .bookings-title {
+        font-size: 24px;
+    }
+
+    .detail-row {
+        flex-direction: column;
+        padding: 10px 0;
+    }
+
+    .detail-label {
+        flex: none;
+        margin-bottom: 5px;
     }
 }
