@@ -4,8 +4,8 @@ import org.example.springmvc.cars.dto.CarDTO;
 import org.example.springmvc.cars.dto.CreateCarDTO;
 import org.example.springmvc.cars.dto.UpdateCarDTO;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,7 +28,7 @@ public class CarController {
 
     @GetMapping
     public String list(
-            @PageableDefault Pageable pageable,
+            @PageableDefault(sort = "make", direction = Sort.Direction.ASC) Pageable pageable,
             @ModelAttribute CarFilter filter,
             Model model
     ) {
