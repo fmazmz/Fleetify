@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <title>Signup</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -7,6 +8,8 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/forms.css}"/>
 </head>
 <body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
 <div class="page-header">
     <h2>Create a Fleetify account</h2>
 </div>

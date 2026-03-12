@@ -8,6 +8,8 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/forms.css}"/>
 </head>
 <body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
 <div th:if="${error}" class="error-message" th:text="${error}">
 </div>
 <div class="form-container">

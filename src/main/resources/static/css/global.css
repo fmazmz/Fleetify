@@ -40,6 +40,15 @@ html {
     color: black;
 }
 
+.navbar-left a,
+.navbar-left a:link,
+.navbar-left a:visited,
+.navbar-left a:hover,
+.navbar-left a:active {
+    text-decoration: none;
+    color: black;
+}
+
 /* Right: buttons and dropdowns */
 .navbar-right {
     display: flex;
@@ -123,4 +132,31 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     overflow-x: hidden;
+}
+/* --- Navbar isolation: ensure no page-level CSS overrides navbar styling --- */
+.navbar form {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    max-width: none;
+    flex-direction: row;
+}
+
+.navbar input,
+.navbar select {
+    width: auto;
+    padding: initial;
+}
+
+.navbar .navbar-right button:not(.dropbtn) {
+    background-color: cornflowerblue;
+    color: white;
+    padding: 6px 12px;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar .navbar-right button:not(.dropbtn):hover {
+    background-color: darkblue;
 }
