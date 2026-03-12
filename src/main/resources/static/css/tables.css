@@ -1,6 +1,3 @@
-/* Table and List Page Styles */
-
-
 .page-header {
     display: flex;
     text-align: center;
@@ -8,56 +5,205 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    margin-top: 0px;
+    margin-top: 30px;
 }
 
-/* List page container */
+.page-header h2 {
+    color: white;
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
 .list-container {
     display: flex;
     text-align: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 0px;
+    margin-top: 20px;
+    padding: 0 20px;
 }
 
-/* Data table */
 .data-table {
     border-collapse: collapse;
-    border: 1px solid black;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
-    background-color: white;
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: 'IBM Plex Mono', monospace;
 }
 
-/* Table header cells */
 .data-table th {
-    border: 1px solid black;
-    padding: 8px 16px;
-    background-color: black;
-    color: white;
+    padding: 18px 16px;
+    background: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    text-align: left;
 }
 
-/* Table data cells */
 .data-table td {
-    border: 1px solid black;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    text-align: left;
+}
+
+.data-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table button {
     padding: 8px 16px;
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 400;
+    min-width: 80px;
 }
 
-/* Pagination container */
+.data-table button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+}
+
+.data-table form button[type="submit"] {
+    border-color: rgba(255, 80, 80, 0.3);
+    color: #ffb3b3;
+}
+
+.data-table form button[type="submit"]:hover {
+    background: rgba(255, 80, 80, 0.15);
+    border-color: rgba(255, 80, 80, 0.5);
+}
+
+.data-table a {
+    text-decoration: none;
+}
+
+.data-table td a button {
+    width: 100%;
+}
+
 .pagination {
-    margin-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 40px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
-/* Success message */
+.pagination a {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.pagination a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.pagination span {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
 .success-message {
-    margin-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
     text-align: center;
-    color: green;
-    font-weight: bold;
+    color: #b3ffb3;
+    font-weight: 400;
+    background: rgba(80, 255, 80, 0.15);
+    border: 1px solid rgba(80, 255, 80, 0.3);
+    padding: 15px 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    backdrop-filter: blur(5px);
 }
 
-/* Empty state message */
 .empty-state {
-    margin-top: 20px;
+    margin-top: 30px;
+    text-align: center;
+    padding: 50px 20px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'IBM Plex Mono', monospace;
 }
 
+@media (max-width: 768px) {
+    .list-container {
+        padding: 0 10px;
+    }
+
+    .data-table {
+        font-size: 13px;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 12px 10px;
+    }
+
+    .data-table button {
+        padding: 6px 12px;
+        min-width: 60px;
+        font-size: 12px;
+    }
+
+    .pagination {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .pagination a {
+        padding: 8px 15px;
+    }
+
+    .page-header h2 {
+        font-size: 28px;
+    }
+}
