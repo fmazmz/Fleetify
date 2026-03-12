@@ -82,7 +82,16 @@ public class CarController {
     @GetMapping("{id}/update")
     public String updateForm(@PathVariable UUID id, Model model) {
         CarDTO car = carService.getById(id);
-        model.addAttribute("car", car);
+        UpdateCarDTO dto = new UpdateCarDTO(
+                car.make(),
+                car.model(),
+                car.hourlyPrice(),
+                car.licencePlate(),
+                car.vin(),
+                car.year()
+        );
+        model.addAttribute("car", dto);
+        model.addAttribute("carId", id);
         return "cars/update";
     }
 
