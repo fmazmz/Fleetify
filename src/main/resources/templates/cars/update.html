@@ -76,7 +76,13 @@
         </div>
 
         <div class="button-container-simple">
+
             <button type="submit">Update Car</button>
+
+            <a th:href="@{/cars/{id}(id=${carId})}">
+                <button type="button">Cancel</button>
+            </a>
+
         </div>
 
     </form>

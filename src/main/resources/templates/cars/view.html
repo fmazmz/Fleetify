@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Car Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/global.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/forms.css}"/>
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="page-header">
+    <h2>Car Details</h2>
+</div>
+
+<div class="form-container-simple">
+    <div class="form-simple">
+
+        <div class="form-field-simple">
+            <label>Make</label>
+            <div class="form-field-input">
+                <span th:text="${car.make}">Make</span>
+            </div>
+        </div>
+
+        <div class="form-field-simple">
+            <label>Model</label>
+            <div class="form-field-input">
+                <span th:text="${car.model}">Model</span>
+            </div>
+        </div>
+
+        <div class="form-field-simple">
+            <label>Hourly Price</label>
+            <div class="form-field-input">
+                <span th:text="${car.hourlyPrice}">Price</span>
+            </div>
+        </div>
+
+        <div class="form-field-simple">
+            <label>Licence Plate</label>
+            <div class="form-field-input">
+                <span th:text="${car.licencePlate}">Plate</span>
+            </div>
+        </div>
+
+        <div class="form-field-simple">
+            <label>VIN</label>
+            <div class="form-field-input">
+                <span th:text="${car.vin}">VIN</span>
+            </div>
+        </div>
+
+        <div class="form-field-simple">
+            <label>Year</label>
+            <div class="form-field-input">
+                <span th:text="${car.year}">Year</span>
+            </div>
+        </div>
+
+        <div class="button-container-simple">
+            <a th:href="@{/cars}">
+                <button type="button">Back to Browse Cars</button>
+            </a>
+
+            <a sec:authorize="hasRole('ADMIN')"
+               th:href="@{/cars/{id}/update(id=${car.id})}">
+                <button type="button">Update</button>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
