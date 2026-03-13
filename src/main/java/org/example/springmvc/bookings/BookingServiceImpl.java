@@ -77,16 +77,20 @@ public class BookingServiceImpl implements BookingService {
             throw new InvalidBookingTimeException(ErrorMessages.INVALID_BOOKING_TIME);
         }
 
+        long hours = Duration.between(dto.startTime(), dto.endTime()).toHours();
+        if (hours <= 0) {
+            throw new InvalidBookingTimeException("Booking duration must be at least 1 hour");
+        }
+
         if (repository.existsOverlappingBooking(car.getId(), dto.startTime(), dto.endTime())) {
             throw new DuplicateEntityException(ErrorMessages.BOOKING_DUPLICATE);
         }
 
-        long hours = Duration.between(dto.startTime(), dto.endTime()).toHours();
         BigDecimal carCost = car.getHourlyPrice().multiply(BigDecimal.valueOf(hours));
         BigDecimal insuranceCost = insurance.getPrice(dto.insuranceType());
         BigDecimal total = carCost.add(insuranceCost);
-        Booking booking = BookingMapper.fromDto(dto, car, driver, total);
 
+        Booking booking = BookingMapper.fromDto(dto, car, driver, total);
         repository.save(booking);
     }
 
@@ -111,6 +115,11 @@ public class BookingServiceImpl implements BookingService {
             throw new InvalidBookingTimeException(ErrorMessages.INVALID_BOOKING_TIME);
         }
 
+        long hours = Duration.between(dto.startTime(), dto.endTime()).toHours();
+        if (hours <= 0) {
+            throw new InvalidBookingTimeException("Booking duration must be at least 1 hour");
+        }
+
         if (!booking.getStartTime().equals(dto.startTime()) ||
                 !booking.getEndTime().equals(dto.endTime()) ||
                 !booking.getCar().getId().equals(dto.carId())) {
@@ -119,14 +128,10 @@ public class BookingServiceImpl implements BookingService {
                     car.getId(),
                     dto.startTime(),
                     dto.endTime(),
-                    id)) {
+                    id
+            )) {
                 throw new DuplicateEntityException(ErrorMessages.BOOKING_DUPLICATE);
             }
-        }
-
-        long hours = Duration.between(dto.startTime(), dto.endTime()).toHours();
-        if (hours <= 0) {
-            throw new InvalidBookingTimeException("Booking duration must be at least 1 hour");
         }
 
         BigDecimal carCost = car.getHourlyPrice().multiply(BigDecimal.valueOf(hours));
