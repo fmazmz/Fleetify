@@ -10,12 +10,16 @@ public record UpdateBookingDTO(
 
         @NotNull
         UUID carId,
+
         @NotNull
         UUID driverId,
+
         @NotNull
         Instant startTime,
+
         @NotNull
         Instant endTime,
+
         @NotNull
         InsuranceType insuranceType
 ) {}

@@ -9,13 +9,21 @@ import java.util.UUID;
 public record BookingDTO(
 
         UUID id,
+
         UUID driverId,
+
         UUID carId,
+
         String carMake,
+
         String carModel,
+
         Instant startTime,
+
         Instant endTime,
+
         InsuranceType insuranceType,
+
         BigDecimal totalPrice
 ) {
 }
