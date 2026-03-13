@@ -21,11 +21,11 @@ public class CarMapper {
 
     public static Car fromDto(CreateCarDTO dto) {
         return new Car(
-                dto.make(),
-                dto.model(),
+                dto.make().trim(),
+                dto.model().trim(),
                 dto.hourlyPrice(),
-                dto.licencePlate(),
-                dto.vin(),
+                dto.licencePlate().trim(),
+                dto.vin().trim(),
                 dto.year()
         );
     }

@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public interface CarService {
 
-    void create(CreateCarDTO dto);
+    CarDTO create(CreateCarDTO dto);
 
     Page<CarDTO> search(Pageable pageable, CarFilter filter);
 

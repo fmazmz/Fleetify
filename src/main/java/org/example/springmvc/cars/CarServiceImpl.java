@@ -15,9 +15,9 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
-
 @Service
 public class CarServiceImpl implements CarService {
+
     private final CarRepository repository;
 
     public CarServiceImpl(CarRepository repository) {
@@ -25,13 +25,13 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void create(CreateCarDTO dto) {
+    public CarDTO create(CreateCarDTO dto) {
         String plate = dto.licencePlate().trim();
         String vin = dto.vin().trim();
 
         if (repository.findByLicencePlateIgnoreCase(plate).isPresent()) {
             throw new DuplicateEntityException(
-                    String.format(ErrorMessages.CAR_DUPLICATE_VIN, vin)
+                    String.format(ErrorMessages.CAR_DUPLICATE_PLATE, plate)
             );
         }
 
@@ -40,8 +40,11 @@ public class CarServiceImpl implements CarService {
                     String.format(ErrorMessages.CAR_DUPLICATE_VIN, vin)
             );
         }
+
         Car car = CarMapper.fromDto(dto);
-        repository.save(car);
+        Car savedCar = repository.save(car);
+
+        return CarMapper.toDto(savedCar);
     }
 
     @Override
@@ -51,6 +54,8 @@ public class CarServiceImpl implements CarService {
                 wildcard(filter.make()),
                 wildcard(filter.model()),
                 filter.year(),
+                filter.minPrice(),
+                filter.maxPrice(),
                 wildcard(filter.licencePlate()),
                 wildcard(filter.vin()),
                 pageable
@@ -95,6 +100,7 @@ public class CarServiceImpl implements CarService {
                     String.format(ErrorMessages.CAR_DUPLICATE_VIN, vin)
             );
         }
+
         CarMapper.updateEntity(car, dto);
         repository.save(car);
     }

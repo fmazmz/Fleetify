@@ -32,7 +32,6 @@ public class CarController {
             @ModelAttribute CarFilter filter,
             Model model
     ) {
-
         var cars = carService.search(pageable, filter);
 
         model.addAttribute("cars", cars);
@@ -57,19 +56,15 @@ public class CarController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
     ) {
-
         if (bindingResult.hasErrors()) {
             return "cars/create";
         }
 
-        carService.create(car);
+        CarDTO createdCar = carService.create(car);
 
-        redirectAttributes.addFlashAttribute(
-                "success",
-                "Car created"
-        );
+        redirectAttributes.addFlashAttribute("success", "Car created");
 
-        return "redirect:/cars";
+        return "redirect:/cars/" + createdCar.id();
     }
 
     @GetMapping("{id}")
@@ -100,15 +95,17 @@ public class CarController {
             @PathVariable UUID id,
             @Valid @ModelAttribute("car") UpdateCarDTO carDto,
             BindingResult bindingResult,
-            RedirectAttributes redirectAttributes
+            RedirectAttributes redirectAttributes,
+            Model model
     ) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("carId", id);
             return "cars/update";
         }
 
         carService.update(id, carDto);
         redirectAttributes.addFlashAttribute("success", "Car updated");
-        return "redirect:/cars";
+        return "redirect:/cars/" + id;
     }
 
     @PostMapping("{id}/delete")
