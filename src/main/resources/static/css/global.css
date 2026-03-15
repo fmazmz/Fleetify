@@ -186,13 +186,13 @@ h2 {
     font-size: 13px;
 }
 
-.btn-danger {
+.btn.btn-danger {
     background: rgba(255, 80, 80, 0.2);
     border-color: rgba(255, 80, 80, 0.3);
     color: #ffb3b3;
 }
 
-.btn-danger:hover {
+.btn.btn-danger:hover {
     background: rgba(255, 80, 80, 0.3);
     border-color: rgba(255, 80, 80, 0.5);
 }
