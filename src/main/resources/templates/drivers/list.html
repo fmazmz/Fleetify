@@ -44,7 +44,7 @@
 
                 <div class="filter-group">
                     <label for="driverId">Driver ID</label>
-                    <input type="text" id="driverId" name="driverId" th:value="${filter.driverId}" placeholder="UUID">
+                    <input type="text" id="driverId" name="driverId" th:value="${filter.driverId != null ? filter.driverId.toString() : ''}" placeholder="UUID">
                 </div>
 
                 <div class="filter-group">

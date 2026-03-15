@@ -275,12 +275,12 @@
 
                 <div class="filter-group">
                     <label for="driverId">Driver ID</label>
-                    <input type="text" id="driverId" name="driverId" th:value="${filter.driverId}" placeholder="UUID">
+                    <input type="text" id="driverId" name="driverId" th:value="${filter.driverId != null ? filter.driverId.toString() : ''}" placeholder="UUID">
                 </div>
 
                 <div class="filter-group">
                     <label for="carId">Car ID</label>
-                    <input type="text" id="carId" name="carId" th:value="${filter.carId}" placeholder="UUID">
+                    <input type="text" id="carId" name="carId" th:value="${filter.carId != null ? filter.carId.toString() : ''}" placeholder="UUID">
                 </div>
 
                 <div class="filter-group">
@@ -290,7 +290,7 @@
                         <option th:each="type : ${insuranceTypes}"
                                 th:value="${type.name()}"
                                 th:text="${type.name()}"
-                                th:selected="${filter.insuranceType == type.name()}">
+                                th:selected="${filter.insuranceType == type}">
                         </option>
                     </select>
                 </div>
