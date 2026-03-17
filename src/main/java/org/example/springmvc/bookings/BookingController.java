@@ -137,7 +137,6 @@ public class BookingController {
 
         model.addAttribute("booking", bookingDTO);
         model.addAttribute("insuranceTypes", pricingService.getInsuranceDisplayNames());
-        model.addAttribute("insurancePrices", pricingService.getInsurancePrices());
 
         if (driver == null) {
             model.addAttribute("error", "You must become a driver first.");
@@ -195,7 +194,6 @@ public class BookingController {
             }
 
             model.addAttribute("insuranceTypes", pricingService.getInsuranceDisplayNames());
-            model.addAttribute("insurancePrices", pricingService.getInsurancePrices());
 
             return "bookings/create";
         }
@@ -238,7 +236,6 @@ public class BookingController {
             }
 
             model.addAttribute("insuranceTypes", pricingService.getInsuranceDisplayNames());
-            model.addAttribute("insurancePrices", pricingService.getInsurancePrices());
 
             return "bookings/create";
         }

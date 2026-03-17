@@ -110,7 +110,6 @@
                                     <option value="">-- Select insurance --</option>
                                     <option th:each="type : ${insuranceTypes}"
                                             th:value="${type.key}"
-                                            th:attr="data-price=${insurancePrices[type.key]}"
                                             th:text="${type.value}">
                                     </option>
                                 </select>
@@ -151,51 +150,7 @@
             <button type="submit" form="bookingForm" class="btn btn-primary">Confirm Booking</button>
         </div>
 
-        <script>
-            (function () {
-                var carSelect = document.getElementById('carId');
-                var insuranceSelect = document.getElementById('insuranceType');
-                var summary = document.getElementById('priceSummary');
-
-                var startInput = document.querySelector('input[name="startTime"]');
-                var endInput = document.querySelector('input[name="endTime"]');
-
-                function getHours() {
-                    var start = new Date(startInput.value);
-                    var end = new Date(endInput.value);
-                    if (isNaN(start) || isNaN(end) || end <= start) return 0;
-                    return Math.floor((end - start) / 3600000);
-                }
-
-                function update() {
-                    var carOption = carSelect.options[carSelect.selectedIndex];
-                    var insOption = insuranceSelect.options[insuranceSelect.selectedIndex];
-
-                    var hourlyPrice = carOption && carOption.dataset.hourlyPrice ? parseFloat(carOption.dataset.hourlyPrice) : 0;
-                    var insPrice = insOption && insOption.dataset.price ? parseFloat(insOption.dataset.price) : 0;
-                    var hours = getHours();
-
-                    if (hourlyPrice > 0 && insPrice > 0 && hours > 0) {
-                        var rental = hourlyPrice * hours;
-                        var total = rental + insPrice;
-
-                        document.getElementById('rentalHours').textContent = hours;
-                        document.getElementById('hourlyRate').textContent = hourlyPrice;
-                        document.getElementById('rentalCost').textContent = rental.toFixed(2);
-                        document.getElementById('insuranceName').textContent = insOption.textContent;
-                        document.getElementById('insuranceCost').textContent = insPrice.toFixed(2);
-                        document.getElementById('totalPrice').textContent = total.toFixed(2);
-                        summary.style.display = '';
-                    } else {
-                        summary.style.display = 'none';
-                    }
-                }
-
-                carSelect.addEventListener('change', update);
-                insuranceSelect.addEventListener('change', update);
-                update();
-            })();
-        </script>
+        <script th:src="@{/js/booking-pricing.js}"></script>
     </div>
 
     <div th:if="${cars != null and cars.isEmpty()}" class="message info">
