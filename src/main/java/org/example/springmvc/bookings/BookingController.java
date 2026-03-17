@@ -13,6 +13,7 @@ import org.example.springmvc.drivers.model.Driver;
 import org.example.springmvc.exceptions.ErrorMessages;
 import org.example.springmvc.exceptions.UnauthorizedActionException;
 import org.example.springmvc.insurances.InsuranceType;
+import org.example.springmvc.pricing.PricingService;
 import org.example.springmvc.users.UserService;
 import org.example.springmvc.users.model.User;
 import org.example.springmvc.users.model.UserRole;
@@ -29,7 +30,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Map;
 import java.util.UUID;
 
 @Slf4j
@@ -41,17 +41,20 @@ public class BookingController {
     private final CarService carService;
     private final DriverService driverService;
     private final UserService userService;
+    private final PricingService pricingService;
 
     public BookingController(
             BookingService bookingService,
             CarService carService,
             DriverService driverService,
-            UserService userService
+            UserService userService,
+            PricingService pricingService
     ) {
         this.bookingService = bookingService;
         this.carService = carService;
         this.driverService = driverService;
         this.userService = userService;
+        this.pricingService = pricingService;
     }
 
     @GetMapping
@@ -133,7 +136,8 @@ public class BookingController {
         );
 
         model.addAttribute("booking", bookingDTO);
-        model.addAttribute("insuranceTypes", insuranceDisplayNames());
+        model.addAttribute("insuranceTypes", pricingService.getInsuranceDisplayNames());
+        model.addAttribute("insurancePrices", pricingService.getInsurancePrices());
 
         if (driver == null) {
             model.addAttribute("error", "You must become a driver first.");
@@ -190,7 +194,8 @@ public class BookingController {
                 );
             }
 
-            model.addAttribute("insuranceTypes", insuranceDisplayNames());
+            model.addAttribute("insuranceTypes", pricingService.getInsuranceDisplayNames());
+            model.addAttribute("insurancePrices", pricingService.getInsurancePrices());
 
             return "bookings/create";
         }
@@ -232,7 +237,8 @@ public class BookingController {
                 );
             }
 
-            model.addAttribute("insuranceTypes", insuranceDisplayNames());
+            model.addAttribute("insuranceTypes", pricingService.getInsuranceDisplayNames());
+            model.addAttribute("insurancePrices", pricingService.getInsurancePrices());
 
             return "bookings/create";
         }
@@ -407,16 +413,7 @@ public class BookingController {
         model.addAttribute("driverDisplay", driverDisplay);
         model.addAttribute("formattedStartTime", formattedStartTime);
         model.addAttribute("formattedEndTime", formattedEndTime);
-        model.addAttribute("insuranceTypes", insuranceDisplayNames());
+        model.addAttribute("insuranceTypes", pricingService.getInsuranceDisplayNames());
         model.addAttribute("isUpdate", true);
-    }
-
-    private Map<InsuranceType, String> insuranceDisplayNames() {
-
-        return Map.of(
-                InsuranceType.BASIC, "Basic",
-                InsuranceType.PREMIUM, "Premium",
-                InsuranceType.FULL_COVERAGE, "Full Coverage"
-        );
     }
 }

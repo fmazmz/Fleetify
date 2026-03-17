@@ -11,8 +11,8 @@ import org.example.springmvc.exceptions.DuplicateEntityException;
 import org.example.springmvc.exceptions.EntityNotFoundException;
 import org.example.springmvc.exceptions.InvalidBookingTimeException;
 import org.example.springmvc.exceptions.UnauthorizedActionException;
-import org.example.springmvc.insurances.CarInsurance;
 import org.example.springmvc.insurances.InsuranceType;
+import org.example.springmvc.pricing.PricingService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -43,7 +43,7 @@ class BookingServiceTest {
     private DriverRepository driverRepository;
 
     @Mock
-    private CarInsurance insurance;
+    private PricingService pricingService;
 
     @InjectMocks
     private BookingService bookingService;
@@ -104,7 +104,7 @@ class BookingServiceTest {
         when(carRepository.findById(car.getId())).thenReturn(Optional.of(car));
         when(driverRepository.findById(driver.getId())).thenReturn(Optional.of(driver));
         when(repository.existsOverlappingBooking(car.getId(), start, end)).thenReturn(false);
-        when(insurance.getPrice(InsuranceType.BASIC)).thenReturn(new BigDecimal("79.0"));
+        when(pricingService.calculateBookingPrice(any(), any(), any(), any())).thenReturn(new BigDecimal("379.00"));
 
         bookingService.create(dto);
 

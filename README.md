@@ -30,7 +30,10 @@ Run the application:
 ./mvnw spring-boot:run
 ```
 
-The app starts on `http://localhost:8080`. On first launch the database schema is created and seeded with sample car data and a test driver account (`testdriver@email.com` / `111`).
+The app starts on `http://localhost:8080`. On first launch the database schema is created and seeded with sample car data and a test accounts.  
+Test Accounts:
+- `admin@email.com` : `admin123` - ROLE = ADMIN
+- `testdriver@email.com` : `111` - ROLE = DRIVER
 
 Run tests (uses an in-memory H2 database):
 

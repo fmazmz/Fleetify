@@ -10,6 +10,9 @@ import org.example.springmvc.exceptions.EntityNotFoundException;
 import org.example.springmvc.exceptions.ErrorMessages;
 import org.example.springmvc.utils.SearchUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,6 +31,10 @@ public class CarService {
         this.repository = repository;
     }
 
+    @Caching(evict = {
+            @CacheEvict(value = "availableCars", allEntries = true),
+            @CacheEvict(value = "cars", allEntries = true)
+    })
     public CarDTO create(CreateCarDTO dto) {
         log.debug("Creating car: make={}, model={}, plate={}", dto.make(), dto.model(), dto.licencePlate());
 
@@ -53,6 +60,12 @@ public class CarService {
         return CarMapper.toDto(savedCar);
     }
 
+    @Cacheable(
+            value = "cars",
+            key = "{#pageable.pageNumber, #pageable.pageSize, #pageable.sort.toString(), " +
+                    "#filter.q, #filter.make, #filter.model, #filter.year, " +
+                    "#filter.minPrice, #filter.maxPrice, #filter.licencePlate, #filter.vin}"
+    )
     public Page<CarDTO> search(Pageable pageable, CarFilter filter) {
         log.debug("Searching cars with filter: q={}, make={}, model={}", filter.q(), filter.make(), filter.model());
         return repository.searchCars(
@@ -68,6 +81,10 @@ public class CarService {
         ).map(CarMapper::toDto);
     }
 
+    @Cacheable(
+            value = "availableCars",
+            key = "{#startTime, #endTime}"
+    )
     public List<CarDTO> findAvailable(Instant startTime, Instant endTime) {
         log.debug("Finding available cars from {} to {}", startTime, endTime);
         return repository.findAvailableCars(startTime, endTime)
@@ -76,6 +93,7 @@ public class CarService {
                 .toList();
     }
 
+    @Cacheable(value = "car", key = "#id")
     public CarDTO getById(UUID id) {
         log.debug("Fetching car by id={}", id);
         Car car = repository.findById(id)
@@ -85,6 +103,11 @@ public class CarService {
         return CarMapper.toDto(car);
     }
 
+    @Caching(evict = {
+            @CacheEvict(value = "cars", allEntries = true),
+            @CacheEvict(value = "availableCars", allEntries = true),
+            @CacheEvict(value = "car", key = "#id")
+    })
     public void update(UUID id, UpdateCarDTO dto) {
         log.debug("Updating car: id={}", id);
         Car car = repository.findById(id)
@@ -112,6 +135,11 @@ public class CarService {
         log.info("Car updated successfully: id={}, plate={}", id, plate);
     }
 
+    @Caching(evict = {
+            @CacheEvict(value = "cars", allEntries = true),
+            @CacheEvict(value = "availableCars", allEntries = true),
+            @CacheEvict(value = "car", key = "#id")
+    })
     public void delete(UUID id) {
         log.debug("Deleting car: id={}", id);
         Car car = repository.findById(id)
