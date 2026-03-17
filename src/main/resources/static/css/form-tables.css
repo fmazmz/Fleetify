@@ -285,6 +285,15 @@
     font-weight: 500;
 }
 
+.price-summary {
+    margin-top: 24px;
+}
+
+.price-total {
+    color: #b3ffb3;
+    font-size: 13px;
+}
+
 .navbar {
     position: relative;
     z-index: 1000;

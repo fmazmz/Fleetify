@@ -15,6 +15,9 @@ import org.example.springmvc.users.UserRepository;
 import org.example.springmvc.users.model.UserRole;
 import org.example.springmvc.utils.SearchUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -37,6 +40,7 @@ public class DriverService {
         this.securityUtils = securityUtils;
     }
 
+    @CacheEvict(value = "drivers", allEntries = true)
     public Driver becomeDriver(UUID userId, CreateDriverDTO dto) {
         log.debug("User becoming driver: userId={}", userId);
 
@@ -77,6 +81,7 @@ public class DriverService {
                 .map(DriverMapper::toDto);
     }
 
+    @Cacheable(value = "driver", key = "#driverId")
     @Transactional(readOnly = true)
     public DriverDTO getById(UUID driverId) {
         Driver driver = driverRepository.findById(driverId)
@@ -86,6 +91,10 @@ public class DriverService {
         return DriverMapper.toDto(driver);
     }
 
+    @Caching(evict = {
+            @CacheEvict(value = "drivers", allEntries = true),
+            @CacheEvict(value = "driver", key = "#driverId")
+    })
     public void update(UUID driverId, UpdateDriverDTO dto) {
         log.debug("Updating driver: driverId={}", driverId);
 
@@ -102,6 +111,10 @@ public class DriverService {
         log.info("Driver updated successfully: driverId={}", driverId);
     }
 
+    @Caching(evict = {
+            @CacheEvict(value = "drivers", allEntries = true),
+            @CacheEvict(value = "driver", key = "#driverId")
+    })
     public void delete(UUID driverId) {
         log.debug("Deleting driver: driverId={}", driverId);
 
@@ -120,6 +133,11 @@ public class DriverService {
         log.info("Driver deleted successfully: driverId={}", driverId);
     }
 
+    @Cacheable(
+            value = "drivers",
+            key = "{#pageable.pageNumber, #pageable.pageSize, #pageable.sort.toString(), " +
+                    "#filter.q, #filter.fname, #filter.lname, #filter.ssn, #filter.driverId}"
+    )
     @Transactional(readOnly = true)
     public Page<DriverDTO> search(Pageable pageable, DriverFilter filter) {
         log.debug("Searching drivers with filter: q={}, fname={}, lname={}", filter.q(), filter.fname(), filter.lname());

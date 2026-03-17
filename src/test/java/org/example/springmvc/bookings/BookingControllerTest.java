@@ -7,6 +7,7 @@ import org.example.springmvc.drivers.DriverService;
 import org.example.springmvc.drivers.dto.DriverDTO;
 import org.example.springmvc.drivers.model.Driver;
 import org.example.springmvc.insurances.InsuranceType;
+import org.example.springmvc.pricing.PricingService;
 import org.example.springmvc.users.UserService;
 import org.example.springmvc.users.model.User;
 import org.example.springmvc.users.model.UserRole;
@@ -49,6 +50,9 @@ class BookingControllerTest {
 
     @MockitoBean
     private UserService userService;
+
+    @MockitoBean
+    private PricingService pricingService;
 
     private BookingDTO sampleBookingDTO() {
         return new BookingDTO(

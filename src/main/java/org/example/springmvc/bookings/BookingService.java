@@ -10,10 +10,12 @@ import org.example.springmvc.cars.model.Car;
 import org.example.springmvc.drivers.DriverRepository;
 import org.example.springmvc.drivers.model.Driver;
 import org.example.springmvc.exceptions.*;
-import org.example.springmvc.insurances.CarInsurance;
-import org.example.springmvc.insurances.InsuranceType;
+import org.example.springmvc.pricing.PricingService;
 import org.example.springmvc.utils.SearchUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,20 +34,25 @@ public class BookingService {
     private final BookingRepository repository;
     private final CarRepository carRepository;
     private final DriverRepository driverRepository;
-    private final CarInsurance insurance;
+    private final PricingService pricingService;
 
     public BookingService(
             BookingRepository repository,
             CarRepository carRepository,
             DriverRepository driverRepository,
-            CarInsurance insurance
+            PricingService pricingService
     ) {
         this.repository = repository;
         this.carRepository = carRepository;
         this.driverRepository = driverRepository;
-        this.insurance = insurance;
+        this.pricingService = pricingService;
     }
 
+    @Cacheable(
+            value = "bookings",
+            key = "{#pageable.pageNumber, #pageable.pageSize, #pageable.sort.toString(), " +
+                    "#filter.q, #filter.carId, #filter.driverId, #filter.insuranceType}"
+    )
     @Transactional(readOnly = true)
     public Page<BookingDTO> search(Pageable pageable, BookingFilter filter) {
         log.debug("Searching bookings with filter: q={}, carId={}, driverId={}", filter.q(), filter.carId(), filter.driverId());
@@ -58,12 +65,17 @@ public class BookingService {
         ).map(BookingMapper::toDto);
     }
 
+    @Cacheable(value = "booking", key = "#id")
     @Transactional(readOnly = true)
     public BookingDTO getById(UUID id) {
         log.debug("Fetching booking by id={}", id);
         return BookingMapper.toDto(findBookingById(id));
     }
 
+    @Caching(evict = {
+            @CacheEvict(value = "bookings", allEntries = true),
+            @CacheEvict(value = "availableCars", allEntries = true)
+    })
     public void create(CreateBookingDTO dto) {
         log.debug("Creating booking: carId={}, driverId={}, startTime={}, endTime={}", dto.carId(), dto.driverId(), dto.startTime(), dto.endTime());
 
@@ -80,8 +92,8 @@ public class BookingService {
             throw new DuplicateEntityException(ErrorMessages.BOOKING_DUPLICATE);
         }
 
-        BigDecimal totalPrice = calculateTotalPrice(
-                car,
+        BigDecimal totalPrice = pricingService.calculateBookingPrice(
+                car.getHourlyPrice(),
                 dto.startTime(),
                 dto.endTime(),
                 dto.insuranceType()
@@ -92,6 +104,11 @@ public class BookingService {
         log.info("Booking created successfully: carId={}, driverId={}, totalPrice={}", dto.carId(), dto.driverId(), totalPrice);
     }
 
+    @Caching(evict = {
+            @CacheEvict(value = "bookings", allEntries = true),
+            @CacheEvict(value = "booking", key = "#id"),
+            @CacheEvict(value = "availableCars", allEntries = true)
+    })
     public void update(UUID id, UpdateBookingDTO dto) {
         log.debug("Updating booking: id={}", id);
 
@@ -115,8 +132,8 @@ public class BookingService {
             throw new DuplicateEntityException(ErrorMessages.BOOKING_DUPLICATE);
         }
 
-        BigDecimal totalPrice = calculateTotalPrice(
-                car,
+        BigDecimal totalPrice = pricingService.calculateBookingPrice(
+                car.getHourlyPrice(),
                 dto.startTime(),
                 dto.endTime(),
                 dto.insuranceType()
@@ -126,6 +143,11 @@ public class BookingService {
         log.info("Booking updated successfully: id={}", id);
     }
 
+    @Caching(evict = {
+            @CacheEvict(value = "bookings", allEntries = true),
+            @CacheEvict(value = "booking", key = "#id"),
+            @CacheEvict(value = "availableCars", allEntries = true)
+    })
     public void delete(UUID id) {
         log.debug("Deleting booking: id={}", id);
         Booking booking = findBookingById(id);
@@ -133,6 +155,11 @@ public class BookingService {
         log.info("Booking deleted successfully: id={}", id);
     }
 
+    @Caching(evict = {
+            @CacheEvict(value = "bookings", allEntries = true),
+            @CacheEvict(value = "booking", key = "#bookingId"),
+            @CacheEvict(value = "availableCars", allEntries = true)
+    })
     public void deleteByDriver(UUID bookingId, UUID driverId) {
         log.debug("Driver deleting booking: bookingId={}, driverId={}", bookingId, driverId);
         Booking booking = findBookingById(bookingId);
@@ -187,19 +214,6 @@ public class BookingService {
         if (duration.toMinutes() < 60) {
             throw new InvalidBookingTimeException("Booking duration must be at least 1 hour");
         }
-    }
-
-    private BigDecimal calculateTotalPrice(
-            Car car,
-            Instant startTime,
-            Instant endTime,
-            InsuranceType insuranceType
-    ) {
-        long hours = Duration.between(startTime, endTime).toHours();
-        BigDecimal carCost = car.getHourlyPrice().multiply(BigDecimal.valueOf(hours));
-        BigDecimal insuranceCost = insurance.getPrice(insuranceType);
-
-        return carCost.add(insuranceCost);
     }
 }
 

@@ -93,6 +93,7 @@
                                     <option value="">-- Select a car --</option>
                                     <option th:each="car : ${cars}"
                                             th:value="${car.id}"
+                                            th:attr="data-hourly-price=${car.hourlyPrice}"
                                             th:text="${car.make + ' ' + car.model + ' (' + car.licencePlate + ') - ' + car.hourlyPrice + ' kr/hr'}">
                                     </option>
                                 </select>
@@ -121,9 +122,35 @@
             </div>
         </div>
 
+        <div id="priceSummary" class="price-summary" style="display: none;">
+            <div class="section-title">Price Breakdown</div>
+            <div class="table-container table-container-max-width-650">
+                <div class="table-card">
+                    <table class="data-table data-table-margin-bottom-0">
+                        <tbody>
+                        <tr>
+                            <td>Rental</td>
+                            <td><span id="rentalHours">0</span> hrs × <span id="hourlyRate">0</span> kr/hr = <strong><span id="rentalCost">0</span> kr</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Insurance</td>
+                            <td><span id="insuranceName">—</span> = <strong><span id="insuranceCost">0</span> kr</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td class="price-total"><strong><span id="totalPrice">0</span> kr</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
         <div class="button-group">
             <button type="submit" form="bookingForm" class="btn btn-primary">Confirm Booking</button>
         </div>
+
+        <script th:src="@{/js/booking-pricing.js}"></script>
     </div>
 
     <div th:if="${cars != null and cars.isEmpty()}" class="message info">
